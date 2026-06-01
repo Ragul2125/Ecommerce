@@ -1,0 +1,101 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ThemeProvider } from "next-themes"
+
+import { RootLayout } from "./layouts/RootLayout"
+import { AuthLayout } from "./layouts/AuthLayout"
+import { DashboardLayout } from "./layouts/DashboardLayout"
+import { ProtectedRoute } from "./components/ProtectedRoute"
+import { Toaster } from "./components/ui/sonner"
+import { ScrollToTop } from "./components/ScrollToTop"
+
+// Pages
+import { HomePage } from "./pages/customer/HomePage"
+import { ProductListingPage } from "./pages/customer/ProductListingPage"
+import { ProductDetailPage } from "./pages/customer/ProductDetailPage"
+import { CategoriesPage } from "./pages/customer/CategoriesPage"
+import { CartPage } from "./pages/customer/CartPage"
+import { CheckoutPage } from "./pages/customer/CheckoutPage"
+import { OrderConfirmationPage } from "./pages/customer/OrderConfirmationPage"
+import { OrderHistoryPage } from "./pages/customer/OrderHistoryPage"
+import { ProfilePage } from "./pages/customer/ProfilePage"
+import { WishlistPage } from "./pages/customer/WishlistPage"
+import { SearchPage } from "./pages/customer/SearchPage"
+import { NotificationsPage } from "./pages/customer/NotificationsPage"
+
+import { NotFoundPage } from "./pages/NotFoundPage"
+
+import { SellerDashboardPage } from "./pages/seller/SellerDashboardPage"
+
+import { LoginPage } from "./pages/auth/LoginPage"
+import { SignupPage } from "./pages/auth/SignupPage"
+import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage"
+import { OTPVerificationPage } from "./pages/auth/OTPVerificationPage"
+
+// Placeholders for unimplemented pages
+const Placeholder = ({ title }: { title: string }) => (
+  <div className="flex h-[50vh] items-center justify-center">
+    <h1 className="text-2xl font-bold">{title} Page (Coming Soon)</h1>
+  </div>
+)
+
+export default function App() {
+  return (
+    <ThemeProvider defaultTheme="system" attribute="class">
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          {/* Public Routes with Navbar/Footer */}
+          <Route element={<RootLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<ProductListingPage />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+            
+            {/* Protected Customer Routes */}
+            <Route element={<ProtectedRoute allowedRoles={["Customer", "Admin", "Seller"]} />}>
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/orders" element={<OrderHistoryPage />} />
+            </Route>
+
+            {/* General Pages */}
+            <Route path="/about" element={<Placeholder title="About" />} />
+            <Route path="/contact" element={<Placeholder title="Contact" />} />
+            <Route path="/terms" element={<Placeholder title="Terms" />} />
+            <Route path="/privacy" element={<Placeholder title="Privacy" />} />
+            
+            {/* 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+
+          {/* Auth Routes */}
+          <Route path="/auth" element={<AuthLayout />}>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="signup" element={<SignupPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="otp-verification" element={<OTPVerificationPage />} />
+          </Route>
+
+          {/* Seller Dashboard Routes */}
+          <Route path="/seller" element={<ProtectedRoute allowedRoles={["Seller", "Admin"]} />}>
+            <Route element={<DashboardLayout />}>
+              <Route path="dashboard" element={<SellerDashboardPage />} />
+              <Route path="products" element={<Placeholder title="Manage Products" />} />
+              <Route path="products/new" element={<Placeholder title="Add/Edit Product" />} />
+              <Route path="orders" element={<Placeholder title="Manage Orders" />} />
+              <Route path="customers" element={<Placeholder title="Customers" />} />
+              <Route path="analytics" element={<Placeholder title="Analytics" />} />
+              <Route path="settings" element={<Placeholder title="Store Settings" />} />
+            </Route>
+          </Route>
+        </Routes>
+        <Toaster />
+      </BrowserRouter>
+    </ThemeProvider>
+  )
+}
