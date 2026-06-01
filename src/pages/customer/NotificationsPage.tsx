@@ -43,7 +43,7 @@ export function NotificationsPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex flex-col gap-6 pb-24 min-h-screen">
+    <div className="flex flex-col gap-6 pb-24">
       {/* Header */}
       <section className="px-4 pt-6 flex items-center justify-between">
          <div className="flex items-center gap-4">

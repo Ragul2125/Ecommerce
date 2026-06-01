@@ -43,7 +43,7 @@ export function HomePage() {
   return (
     <div className="flex flex-col gap-24 pb-40">
       {/* 1. New Minimalist Editorial Entrance */}
-      <section className="px-6 pt-12 md:pt-20">
+      <section className="px-6 pt-6 md:pt-10">
          <motion.div 
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}

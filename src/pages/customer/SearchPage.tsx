@@ -37,7 +37,7 @@ export function SearchPage() {
   }, [query])
 
   return (
-    <div className="flex flex-col gap-6 pb-24 min-h-screen">
+    <div className="flex flex-col gap-6 pb-24">
       {/* Search Header */}
       <section className="px-4 pt-6 space-y-4">
         <div className="flex items-center gap-3">

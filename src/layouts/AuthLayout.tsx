@@ -16,7 +16,7 @@ export function AuthLayout() {
               <span className="font-bold font-heading text-lg">E</span>
             </div>
             <span className="font-heading text-2xl font-bold tracking-tight">
-              Premium
+              Ecommerce
             </span>
           </Link>
         </div>

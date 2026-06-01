@@ -12,7 +12,7 @@ export function Footer() {
                 <span className="font-bold font-heading">E</span>
               </div>
               <span className="font-heading text-xl font-bold tracking-tight">
-                Premium
+                Ecommerce
               </span>
             </Link>
             <p className="mb-6 max-w-sm text-sm text-muted-foreground leading-relaxed">
@@ -57,7 +57,7 @@ export function Footer() {
         </div>
         
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Premium Ecommerce. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ecommerce. All rights reserved.</p>
           <div className="flex gap-4">
             <span className="cursor-pointer hover:text-foreground">USD ($)</span>
             <span className="cursor-pointer hover:text-foreground">English</span>

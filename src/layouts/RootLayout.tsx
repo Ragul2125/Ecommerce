@@ -9,7 +9,7 @@ export function RootLayout() {
   const isCheckoutPath = location.pathname === "/checkout" || location.pathname === "/order-confirmation"
 
   return (
-    <div className={`flex min-h-screen flex-col relative ${isCheckoutPath ? "" : "pb-20 md:pb-0"} overflow-x-hidden`}>
+    <div className={`flex min-h-dvh flex-col relative pt-16 md:pt-20 ${isCheckoutPath ? "" : "pb-20 md:pb-0"}`}>
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main

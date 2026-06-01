@@ -71,7 +71,7 @@ export function InstallPrompt() {
       </div>
       
       <div className="flex-1">
-        <h4 className="font-medium text-sm">Install Premium App</h4>
+        <h4 className="font-medium text-sm">Install Ecommerce App</h4>
         <p className="text-xs text-muted-foreground mt-1">
           Install our application for a faster, offline-ready shopping experience right from your home screen.
         </p>

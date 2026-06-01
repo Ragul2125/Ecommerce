@@ -53,7 +53,7 @@ export function ProfilePage() {
   }
 
   return (
-    <div className="flex flex-col gap-16 pb-40 min-h-screen">
+    <div className="flex flex-col gap-16 pb-40">
       {/* 1. Profile Core Header */}
       <section className="px-6 pt-10">
          <motion.div 

@@ -28,7 +28,7 @@ export function WishlistPage() {
   }
 
   return (
-    <div className="flex flex-col gap-12 pb-20 min-h-screen">
+    <div className="flex flex-col gap-12 pb-20">
       {/* Editorial Header */}
       <section className="px-6 pt-10">
          <motion.div 

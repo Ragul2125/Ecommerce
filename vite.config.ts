@@ -13,11 +13,11 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        name: 'Premium Ecommerce',
+        name: 'Ecommerce',
         short_name: 'Ecommerce',
-        description: 'A premium ecommerce platform',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        description: 'An ecommerce platform',
+        theme_color: '#080a10',
+        background_color: '#080a10',
         display: 'standalone',
         icons: [
           {
