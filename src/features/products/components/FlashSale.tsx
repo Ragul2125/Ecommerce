@@ -26,7 +26,7 @@ export function FlashSale() {
   }
 
   const flashItems = [
-    { id: 'f1', name: 'Velvet Evening Bag', price: 24070, salePrice: 12035, image: 'https://images.unsplash.com/photo-1548036627-19fce01d15bb?w=400&q=80' },
+    { id: 'f1', name: 'Velvet Evening Bag', price: 24070, salePrice: 12035, image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&q=80' },
     { id: 'f2', name: 'Silk Pocket Square', price: 7055, salePrice: 3486, image: 'https://images.unsplash.com/photo-1598452963314-b09f397a5c48?w=400&q=80' },
     { id: 'f3', name: 'Suede Loafers', price: 34860, salePrice: 17430, image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=400&q=80' },
   ]

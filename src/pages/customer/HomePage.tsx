@@ -92,7 +92,7 @@ export function HomePage() {
            className="relative group h-[450px] md:h-[600px] w-full rounded-[3.5rem] overflow-hidden bg-zinc-900 shadow-premium"
          >
             <img 
-              src="https://images.unsplash.com/photo-1539106609512-7179667ad99a?w=1600&q=80" 
+              src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1600&q=80" 
               alt="Featured Artifact" 
               className="h-full w-full object-cover object-top opacity-80 group-hover:scale-105 transition-transform duration-1000"
             />
