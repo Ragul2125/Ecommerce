@@ -25,6 +25,12 @@ import { NotificationsPage } from "./pages/customer/NotificationsPage"
 import { NotFoundPage } from "./pages/NotFoundPage"
 
 import { SellerDashboardPage } from "./pages/seller/SellerDashboardPage"
+import { SellerProductsPage } from "./pages/seller/SellerProductsPage"
+import { SellerProductFormPage } from "./pages/seller/SellerProductFormPage"
+import { SellerOrdersPage } from "./pages/seller/SellerOrdersPage"
+import { SellerCustomersPage } from "./pages/seller/SellerCustomersPage"
+import { SellerAnalyticsPage } from "./pages/seller/SellerAnalyticsPage"
+import { SellerSettingsPage } from "./pages/seller/SellerSettingsPage"
 
 import { LoginPage } from "./pages/auth/LoginPage"
 import { SignupPage } from "./pages/auth/SignupPage"
@@ -85,12 +91,13 @@ export default function App() {
           <Route path="/seller" element={<ProtectedRoute allowedRoles={["Seller", "Admin"]} />}>
             <Route element={<DashboardLayout />}>
               <Route path="dashboard" element={<SellerDashboardPage />} />
-              <Route path="products" element={<Placeholder title="Manage Products" />} />
-              <Route path="products/new" element={<Placeholder title="Add/Edit Product" />} />
-              <Route path="orders" element={<Placeholder title="Manage Orders" />} />
-              <Route path="customers" element={<Placeholder title="Customers" />} />
-              <Route path="analytics" element={<Placeholder title="Analytics" />} />
-              <Route path="settings" element={<Placeholder title="Store Settings" />} />
+              <Route path="products" element={<SellerProductsPage />} />
+              <Route path="products/new" element={<SellerProductFormPage />} />
+              <Route path="products/edit/:id" element={<SellerProductFormPage />} />
+              <Route path="orders" element={<SellerOrdersPage />} />
+              <Route path="customers" element={<SellerCustomersPage />} />
+              <Route path="analytics" element={<SellerAnalyticsPage />} />
+              <Route path="settings" element={<SellerSettingsPage />} />
             </Route>
           </Route>
         </Routes>
