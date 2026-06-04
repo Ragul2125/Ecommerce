@@ -10,12 +10,12 @@ export function AuthLayout() {
       </div>
       
       <div className="relative z-10 w-full max-w-md">
-        <div className="mb-8 flex justify-center">
+        <div className="mb-8 flex justify-center mt-8">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/30">
-              <span className="font-bold font-heading text-lg">E</span>
+              <span className="font-bold font-heading text-lg">S</span>
             </div>
-            <span className="font-heading text-2xl font-bold tracking-tight">
+            <span className="font-heading text-2xl font-bold tracking-tight ">
               Ecommerce
             </span>
           </Link>

@@ -51,10 +51,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
         />
         
         {/* Quick Add Overlay */}
-        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hidden md:block z-20">
+        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hidden md:block z-20 ">
            <button 
              onClick={handleQuickAdd}
-             className="w-full h-12 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-full shadow-2xl hover:scale-[1.05] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+             className="w-full h-12 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-full shadow-2xl hover:scale-[1.05] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
            >
               <ShoppingCart className="h-4 w-4" />
               Quick Acquisition
@@ -62,11 +62,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
         </div>
 
         {/* Wishlist Button */}
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-2 right-2 z-10">
            <button 
              onClick={handleWishlistClick}
              className={cn(
-               "h-10 w-10 flex items-center justify-center rounded-full backdrop-blur-xl shadow-premium transition-all duration-500 active:scale-90",
+               "h-10 w-10 flex items-center justify-center rounded-full backdrop-blur-xl shadow-premium transition-all duration-500 active:scale-90 cursor-pointer",
                isFavorite ? "bg-primary text-primary-foreground shadow-glow" : "bg-white/90 text-black hover:bg-white"
              )}
            >
@@ -77,7 +77,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-col gap-2">
            {product.salePrice && (
-              <div className="bg-secondary text-white rounded-full px-4 py-1.5 text-[8px] font-black tracking-[0.2em] uppercase shadow-premium backdrop-blur-md bg-opacity-90">
+              <div className="bg-secondary text-secondary-foreground rounded-full px-4 py-1.5 text-[8px] font-black tracking-[0.2em] uppercase shadow-premium backdrop-blur-md bg-opacity-90">
                  -{Math.round((1 - product.salePrice / product.price) * 100)}%
               </div>
            )}
@@ -90,7 +90,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
         {/* Rating Floating */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-premium group-hover:opacity-0 transition-opacity duration-300">
-           <Star className="h-3 w-3 fill-primary text-primary" />
+           <Star className="h-3 w-3 text-black fill-black" />
            <span className="text-[10px] font-black text-black tracking-tighter">{product.rating}</span>
         </div>
       </div>
@@ -100,7 +100,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
           {product.name}
         </h3>
         
-        <div className="flex items-end justify-between gap-2">
+        <div className="flex items-end justify-between gap-2 ">
           <div className="flex flex-col gap-0.5">
             {product.salePrice && (
                <span className="text-[9px] font-black text-muted-foreground/50 line-through tracking-widest leading-none">
@@ -113,9 +113,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </span>
           </div>
           
-          <div className="text-[8px] text-muted-foreground/70 font-black uppercase tracking-[0.2em] pr-3">
+          {/* <div className="text-[8px] text-muted-foreground/70 font-black uppercase tracking-[0.2em] pr-3 text-center">
              {product.soldCount || 0} Circulated
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>

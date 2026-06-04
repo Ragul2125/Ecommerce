@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { Filter } from "lucide-react"
+import { Filter, ChevronRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -99,30 +99,36 @@ export function ProductListingPage() {
         </motion.div>
 
         {/* Horizontal Category Navigation */}
-        <div className="flex gap-3 overflow-x-auto pb-6 no-scrollbar mask-fade-right">
-          <Button 
-            variant={!categorySlug ? "default" : "outline"} 
-            className={cn(
-               "rounded-full px-8 h-12 text-[10px] font-black uppercase tracking-widest transition-all",
-               !categorySlug ? "shadow-glow" : "border-border/10 opacity-60 hover:opacity-100"
-            )}
-            onClick={() => handleCategorySelect(null)}
-          >
-            All Collective
-          </Button>
-          {categories.map(cat => (
+        <div className="relative">
+          <div className="flex gap-3 overflow-x-auto pb-6 no-scrollbar mask-fade-right">
             <Button 
-              key={cat.id}
-              variant={categorySlug === cat.slug ? "default" : "outline"} 
+              variant={!categorySlug ? "default" : "outline"} 
               className={cn(
-                "rounded-full px-8 h-12 text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap",
-                categorySlug === cat.slug ? "shadow-glow" : "border-border/10 opacity-60 hover:opacity-100"
+                 "rounded-full px-8 h-12 text-[10px] font-black uppercase tracking-widest transition-all",
+                 !categorySlug ? "shadow-glow" : "border-border/10 opacity-60 hover:opacity-100"
               )}
-              onClick={() => handleCategorySelect(cat.slug)}
+              onClick={() => handleCategorySelect(null)}
             >
-              {cat.name}
+              All Collective
             </Button>
-          ))}
+            {categories.map(cat => (
+              <Button 
+                key={cat.id}
+                variant={categorySlug === cat.slug ? "default" : "outline"} 
+                className={cn(
+                  "rounded-full px-8 h-12 text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap",
+                  categorySlug === cat.slug ? "shadow-glow" : "border-border/10 opacity-60 hover:opacity-100"
+                )}
+                onClick={() => handleCategorySelect(cat.slug)}
+              >
+                {cat.name}
+              </Button>
+            ))}
+          </div>
+          {/* Scroll Right Indicator */}
+          <div className="absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-background via-background/80 to-transparent flex items-center justify-end pointer-events-none pr-1">
+             <ChevronRight className="h-5 w-5 text-muted-foreground animate-pulse" />
+          </div>
         </div>
       </section>
 

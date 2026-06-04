@@ -58,13 +58,23 @@ export function CategoriesPage() {
             <h1 className="text-3xl font-black font-heading tracking-tighter leading-none">Catalog.</h1>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em]">Explore our full architecture</p>
          </div>
-         <Button 
-            variant="ghost" 
-            size="icon" 
-            className="rounded-full bg-muted/20 border border-border/10 h-12 w-12 hover:scale-110 active:scale-95 transition-all"
-         >
-            <Search className="h-5 w-5" />
-         </Button>
+         <div className="flex items-center gap-3">
+            <Button 
+               variant="outline"
+               onClick={() => navigate('/products')}
+               className="rounded-full font-black uppercase tracking-widest text-[9px] px-6 h-12 border-2 cursor-pointer transition-all hover:scale-105 active:scale-95"
+            >
+               Shop All
+            </Button>
+            <Button 
+               variant="ghost" 
+               size="icon" 
+               onClick={() => navigate('/search')}
+               className="rounded-full bg-muted/20 border border-border/10 h-12 w-12 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+            >
+               <Search className="h-5 w-5" />
+            </Button>
+         </div>
       </div>
 
       <div className="flex flex-1 overflow-hidden">

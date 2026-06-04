@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-heading: 'Outfit', 'Inter', sans-serif;
@@ -65,6 +67,9 @@
     --color-border: hsl(224 15% 12%);
     --color-input: hsl(224 15% 12%);
     --color-ring: hsl(210 20% 98%);
+
+    --color-white: hsl(224 20% 4%);
+    --color-black: hsl(210 20% 98%);
   }
 }
 

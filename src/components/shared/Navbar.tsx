@@ -13,13 +13,15 @@ import {
 } from "../ui/dropdown-menu"
 import { Badge } from "../ui/badge"
 import { useCartStore } from "@/store/cartStore"
+import { useWishlistStore } from "@/store/wishlistStore"
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
   const [search, setSearch] = useState("")
   
-  const cartCount = useCartStore(state => state.totalItems)
+  const cartCount = useCartStore(state => state.items.reduce((acc, item) => acc + item.quantity, 0))
+  const wishlistCount = useWishlistStore(state => state.items.length)
 
   const handleSearch = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && search.trim()) {
@@ -62,7 +64,6 @@ export function Navbar() {
           {/* Desktop Right Actions */}
           <div className="hidden md:flex items-center gap-4">
             <nav className="flex items-center gap-8 mr-4">
-              <Link to="/products" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-primary transition-colors pointer-events-auto">Shop</Link>
               <Link to="/categories" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-primary transition-colors pointer-events-auto">Logistics</Link>
             </nav>
 
@@ -98,11 +99,22 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            <Link to="/wishlist">
+              <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-full bg-muted/20 hover:bg-primary/10 transition-all">
+                <Heart className="h-4 w-4" />
+                {wishlistCount > 0 && (
+                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center rounded-full bg-primary border-2 border-background text-[8px] font-black">
+                    {wishlistCount}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-full bg-muted/20 hover:bg-primary/10 transition-all">
                 <ShoppingCart className="h-4 w-4" />
                 {cartCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center rounded-full bg-primary border-4 border-background text-[8px] font-black">
+                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center rounded-full bg-primary border-2 border-background text-[8px] font-black">
                     {cartCount}
                   </Badge>
                 )}
@@ -128,21 +140,6 @@ export function Navbar() {
               >
                 <Search className="h-4 w-4" />
               </Button>
-              <Link to="/wishlist">
-                 <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full hover:bg-primary/5 transition-all">
-                   <Heart className="h-4 w-4" />
-                 </Button>
-              </Link>
-              <Link to="/cart">
-                <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-full hover:bg-primary/5 transition-all">
-                  <ShoppingCart className="h-4 w-4" />
-                  {cartCount > 0 && (
-                    <Badge className="absolute -top-1 -right-1 h-4 w-4 flex items-center justify-center rounded-full bg-primary border-2 border-background text-[7px] font-black">
-                      {cartCount}
-                    </Badge>
-                  )}
-                </Button>
-              </Link>
           </div>
         </div>
       </div>

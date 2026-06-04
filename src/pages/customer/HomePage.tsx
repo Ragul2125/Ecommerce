@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -122,7 +123,9 @@ export function HomePage() {
               <h2 className="text-4xl font-black font-heading tracking-tighter leading-none">Signature Essentials</h2>
               <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-[0.3em]">Handpicked for permanent style</p>
            </div>
-           <Button variant="outline" className="rounded-full h-12 px-8 font-black uppercase tracking-widest text-[10px] border-2">Explore All</Button>
+           <Link to="/products">
+              <Button variant="outline" className="rounded-full h-10 w-40 font-black uppercase tracking-widest text-[10px] border-2 cursor-pointer">Explore All</Button>
+           </Link>
         </div>
 
         <motion.div 
@@ -166,7 +169,7 @@ export function HomePage() {
                  placeholder="Enter your email" 
                  className="flex-1 h-14 rounded-full bg-white/10 border border-white/20 px-8 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/50"
                />
-               <Button size="lg" className="rounded-full h-14 px-10 bg-white text-black font-black uppercase tracking-widest text-xs">
+               <Button size="lg" className="rounded-full h-14 px-10 bg-white text-black font-black uppercase tracking-widest text-xs cursor-pointer">
                   Join Now
                </Button>
             </div>

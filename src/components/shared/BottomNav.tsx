@@ -1,15 +1,19 @@
 import { Link, useLocation } from "react-router-dom"
 import { Home, LayoutGrid, ShoppingBag, Heart, User } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useCartStore } from "@/store/cartStore"
+import { useWishlistStore } from "@/store/wishlistStore"
 
 export function BottomNav() {
   const location = useLocation()
+  const cartCount = useCartStore(state => state.items.reduce((acc, item) => acc + item.quantity, 0))
+  const wishlistCount = useWishlistStore(state => state.items.length)
   
   const navItems = [
     { icon: Home, path: "/" },
-    { icon: Heart, path: "/wishlist" },
+    { icon: Heart, path: "/wishlist", count: wishlistCount },
     { icon: LayoutGrid, path: "/categories" },
-    { icon: ShoppingBag, path: "/cart" },
+    { icon: ShoppingBag, path: "/cart", count: cartCount },
     { icon: User, path: "/profile" },
   ]
 
@@ -26,7 +30,15 @@ export function BottomNav() {
               isActive ? "text-primary active:scale-90" : "text-muted-foreground/60 hover:text-primary/60"
             )}
           >
-            <item.icon className={cn("h-7 w-7 transition-all", isActive && "stroke-[2.5px]")} />
+            <div className="relative">
+              <item.icon className={cn("h-7 w-7 transition-all", isActive && "stroke-[2.5px]")} />
+              
+              {item.count !== undefined && item.count > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 h-4 w-4 flex items-center justify-center rounded-full bg-primary text-primary-foreground border-2 border-background text-[7px] font-black shadow-sm">
+                  {item.count}
+                </span>
+              )}
+            </div>
             
             {/* Active Dash Indicator */}
             {isActive && (
