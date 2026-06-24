@@ -32,6 +32,19 @@ export const authService = {
         token: "mock-jwt-seller-token"
       }
     }
+
+    if (email === "admin@premium.com" && password === "password") {
+      return {
+        user: {
+          id: "admin-789",
+          name: "Super Admin",
+          email,
+          role: "Admin",
+          avatar: "https://i.pravatar.cc/150?u=admin"
+        },
+        token: "mock-jwt-admin-token"
+      }
+    }
     
     if (email === "customer@premium.com" && password === "password") {
       return {

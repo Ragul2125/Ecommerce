@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes"
 import { RootLayout } from "./layouts/RootLayout"
 import { AuthLayout } from "./layouts/AuthLayout"
 import { DashboardLayout } from "./layouts/DashboardLayout"
+import { AdminLayout } from "./layouts/AdminLayout"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import { Toaster } from "./components/ui/sonner"
 import { ScrollToTop } from "./components/ScrollToTop"
@@ -31,6 +32,13 @@ import { SellerOrdersPage } from "./pages/seller/SellerOrdersPage"
 import { SellerCustomersPage } from "./pages/seller/SellerCustomersPage"
 import { SellerAnalyticsPage } from "./pages/seller/SellerAnalyticsPage"
 import { SellerSettingsPage } from "./pages/seller/SellerSettingsPage"
+
+import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage"
+import { AdminUsersPage } from "./pages/admin/AdminUsersPage"
+import { AdminSellersPage } from "./pages/admin/AdminSellersPage"
+import { AdminProductsPage } from "./pages/admin/AdminProductsPage"
+import { AdminCategoriesPage } from "./pages/admin/AdminCategoriesPage"
+import { AdminOrdersPage } from "./pages/admin/AdminOrdersPage"
 
 import { LoginPage } from "./pages/auth/LoginPage"
 import { SignupPage } from "./pages/auth/SignupPage"
@@ -98,6 +106,18 @@ export default function App() {
               <Route path="customers" element={<SellerCustomersPage />} />
               <Route path="analytics" element={<SellerAnalyticsPage />} />
               <Route path="settings" element={<SellerSettingsPage />} />
+            </Route>
+          </Route>
+
+          {/* Admin Dashboard Routes */}
+          <Route path="/admin" element={<ProtectedRoute allowedRoles={["Admin"]} />}>
+            <Route element={<AdminLayout />}>
+              <Route path="dashboard" element={<AdminDashboardPage />} />
+              <Route path="users" element={<AdminUsersPage />} />
+              <Route path="sellers" element={<AdminSellersPage />} />
+              <Route path="products" element={<AdminProductsPage />} />
+              <Route path="categories" element={<AdminCategoriesPage />} />
+              <Route path="orders" element={<AdminOrdersPage />} />
             </Route>
           </Route>
         </Routes>
