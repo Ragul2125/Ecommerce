@@ -45,9 +45,6 @@ function CategoriesPage() {
     loadSub();
   }, [activeSuperId]);
   return <div className="flex flex-col h-[calc(100vh-140px)] bg-muted/10 overflow-hidden">
-      {
-    /* 1. Minimal Header */
-  }
       <div className="bg-background px-6 py-8 border-b border-border/10 flex items-center justify-between">
          <div className="space-y-1">
             <h1 className="text-3xl font-black font-heading tracking-tighter leading-none">Catalog.</h1>
@@ -71,11 +68,7 @@ function CategoriesPage() {
             </Button>
          </div>
       </div>
-
       <div className="flex flex-1 overflow-hidden">
-        {
-    /* 2. Vertically Refined Sidebar */
-  }
         <div className="w-28 md:w-36 bg-background border-r border-border/10 overflow-y-auto no-scrollbar py-6">
           <div className="flex flex-col gap-2">
              {superCategories.map((sup) => {
@@ -106,10 +99,6 @@ function CategoriesPage() {
   })}
           </div>
         </div>
-
-        {
-    /* 3. Editorial Explorer Area */
-  }
         <div className="flex-1 bg-background p-8 overflow-y-auto no-scrollbar scroll-smooth">
           <AnimatePresence mode="wait">
             {isLoading ? <motion.div
@@ -128,9 +117,6 @@ function CategoriesPage() {
     transition={{ duration: 0.5 }}
     className="space-y-12"
   >
-                {
-    /* Visual Category Banner - Refined Padding to prevent clipping */
-  }
                 <div className="relative aspect-[16/7] rounded-[3rem] overflow-hidden bg-zinc-900 group shadow-premium hover:shadow-glow transition-all duration-700">
                    <div className="absolute inset-0 bg-black/40 z-[1] group-hover:bg-black/20 transition-all duration-700" />
                    <img
@@ -144,10 +130,6 @@ function CategoriesPage() {
                       <p className="text-white/60 text-[10px] font-black uppercase tracking-[0.4em]">Curated {superCategories.find((s) => s.id === activeSuperId)?.name} Pieces</p>
                    </div>
                 </div>
-
-                {
-    /* Sub-Category Composition */
-  }
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 px-2">
                   {subCategories.map((cat, idx) => <motion.button
     key={cat.id}
@@ -174,21 +156,6 @@ function CategoriesPage() {
                          <div className="h-1 w-0 bg-primary/20 mx-auto rounded-full group-hover:w-full transition-all duration-500" />
                       </div>
                     </motion.button>)}
-                </div>
-
-                {
-    /* Seasonal Curations */
-  }
-                <div className="pt-10 space-y-6">
-                   <div className="flex items-center gap-4">
-                      <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Premier Partners</h3>
-                      <div className="flex-1 h-[1px] bg-border/10" />
-                   </div>
-                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      {["Zara Studio", "H&M Move", "Nike Lab", "Gucci Archive"].map((brand, _i) => <button key={brand} className="h-16 border border-border/10 rounded-[2rem] flex items-center justify-center px-4 bg-muted/5 font-black text-[9px] uppercase tracking-widest text-muted-foreground/30 hover:text-primary hover:bg-primary/5 hover:border-primary/20 transition-all duration-500">
-                          {brand}
-                        </button>)}
-                   </div>
                 </div>
               </motion.div>}
           </AnimatePresence>

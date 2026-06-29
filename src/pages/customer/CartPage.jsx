@@ -44,11 +44,7 @@ function CartPage() {
              </div>
           </motion.div>
        </section>
-
        <div className="flex flex-col gap-16 px-6 lg:flex-row lg:items-start lg:gap-20">
-          {
-    /* List of Items */
-  }
           <div className="flex-1">
              <div className="space-y-8">
                <AnimatePresence mode="popLayout">
@@ -65,7 +61,6 @@ function CartPage() {
                         <div className="h-32 w-32 shrink-0 rounded-[2rem] overflow-hidden bg-muted shadow-lg">
                            <img src={item.product.images[0]} alt={item.product.name} className="h-full w-full object-cover transition-transform group-hover:scale-110 duration-700" />
                         </div>
-
                         <div className="flex-1 flex flex-col justify-between py-1">
                            <div className="flex justify-between items-start">
                               <div className="space-y-1">
@@ -84,9 +79,8 @@ function CartPage() {
                                  <Trash2 className="h-4 w-4" />
                               </Button>
                            </div>
-
                            <div className="flex justify-between items-end">
-                              <div className="flex items-center gap-5 bg-white/40 dark:bg-zinc-800/40 rounded-full p-1 border border-border/20 shadow-inner">
+                              <div className="flex items-center gap-2 sm:gap-4 bg-white/40 dark:bg-zinc-800/40 rounded-full p-1 border border-border/20 shadow-inner">
                                  <Button
       variant="ghost"
       size="icon"
@@ -117,10 +111,6 @@ function CartPage() {
                </AnimatePresence>
              </div>
           </div>
-
-          {
-    /* Summary Section */
-  }
           <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -128,17 +118,12 @@ function CartPage() {
     className="w-full lg:w-[450px] sticky top-32"
   >
              <div className="rounded-[3rem] bg-primary text-primary-foreground p-10 space-y-10 shadow-glow relative overflow-hidden">
-                {
-    /* Decorative backgrounds */
-  }
                 <div className="absolute top-0 right-0 h-40 w-40 bg-white/5 blur-3xl -mr-20 -mt-20" />
                 <div className="absolute bottom-0 left-0 h-40 w-40 bg-white/5 blur-3xl -ml-20 -mb-20" />
-
                 <div className="space-y-1 relative z-10 text-center md:text-left">
                    <h2 className="text-2xl font-black font-heading tracking-tight">Investment Summary</h2>
                    <p className="text-[9px] font-black uppercase tracking-[0.3em] opacity-40">Secure Checkout Process</p>
                 </div>
-                
                 <div className="space-y-6 relative z-10">
                     <div className="flex justify-between items-center text-sm">
                        <span className="opacity-60 font-medium">Core Value</span>
@@ -153,13 +138,11 @@ function CartPage() {
                        <span className="font-black">₹{Math.round(tax).toLocaleString()}</span>
                     </div>
                  </div>
-  
                  <div className="pt-8 border-t border-white/10 flex flex-col items-center md:items-stretch gap-6 relative z-10">
                     <div className="flex justify-between items-baseline w-full px-2">
                        <span className="text-lg font-bold opacity-70">Total Acquisition</span>
                        <span className="text-4xl font-black tracking-tighter">₹{Math.round(total).toLocaleString()}</span>
                     </div>
-
                     <div className="space-y-4 w-full">
                        <Button
     onClick={() => {
@@ -173,7 +156,6 @@ function CartPage() {
   >
                           Complete Acquisition
                        </Button>
-                       
                        <Button
     variant="ghost"
     onClick={() => navigate("/")}
@@ -183,7 +165,6 @@ function CartPage() {
                        </Button>
                     </div>
                  </div>
-
                  <div className="flex justify-center gap-6 opacity-30 relative z-10">
                     <div className="text-[8px] font-black uppercase tracking-widest border border-white/40 px-3 py-1 rounded-full">Secure 256-Bit</div>
                     <div className="text-[8px] font-black uppercase tracking-widest border border-white/40 px-3 py-1 rounded-full">Global Express</div>

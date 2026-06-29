@@ -25,7 +25,6 @@ let mockOrders = [
   { id: "ORD-9277", customer: "Evan Wright", date: "2026-04-05", total: 12035, status: "Completed", items: [{ name: "Merino Wool Roll Neck", quantity: 1, price: 12035 }] }
 ];
 const sellerService = {
-  // Stats
   async getDashboardStats() {
     await delay(300);
     const revenue = mockOrders.reduce((sum, o) => o.status !== "Cancelled" ? sum + o.total : sum, 0);
@@ -61,7 +60,6 @@ const sellerService = {
     await delay(300);
     return mockOrders.slice(0, 5);
   },
-  // Products CRUD
   async getProducts() {
     await delay(300);
     return [...mockProducts];
@@ -100,7 +98,6 @@ const sellerService = {
     }
     return false;
   },
-  // Orders CRUD
   async getOrders() {
     await delay(300);
     return [...mockOrders];
@@ -114,12 +111,10 @@ const sellerService = {
     }
     throw new Error("Order not found");
   },
-  // Customers
   async getCustomers() {
     await delay(300);
     return [...mockCustomers];
   },
-  // Settings
   async getStoreSettings() {
     await delay(200);
     return { ...storeSettings };

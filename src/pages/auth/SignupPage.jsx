@@ -61,7 +61,6 @@ function SignupPage() {
           Enter your details below to create your account
         </p>
       </div>
-      
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div className="space-y-3">
           <Label>I want to sign up as a</Label>
@@ -88,7 +87,6 @@ function SignupPage() {
             </div>
           </div>
         </div>
-
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
@@ -100,7 +98,6 @@ function SignupPage() {
   />
             {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -112,7 +109,6 @@ function SignupPage() {
   />
             {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
           </div>
-          
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input
@@ -124,20 +120,17 @@ function SignupPage() {
             {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
           </div>
         </div>
-        
         <Button className="w-full" type="submit" disabled={isLoading}>
           {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Create Account
         </Button>
       </form>
-      
       <div className="mt-6 text-center text-sm">
         Already have an account?{" "}
         <Link to="/auth/login" className="text-primary hover:underline">
           Sign In
         </Link>
       </div>
-
       <div className="mt-8 flex justify-center border-t border-border/10 pt-6">
         <Link
     to="/"

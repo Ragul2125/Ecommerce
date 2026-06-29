@@ -35,8 +35,6 @@ import { AdminCategoriesPage } from "./pages/admin/AdminCategoriesPage";
 import { AdminOrdersPage } from "./pages/admin/AdminOrdersPage";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { SignupPage } from "./pages/auth/SignupPage";
-import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage";
-import { OTPVerificationPage } from "./pages/auth/OTPVerificationPage";
 const Placeholder = ({ title }) => <div className="flex h-[50vh] items-center justify-center">
     <h1 className="text-2xl font-bold">{title} Page (Coming Soon)</h1>
   </div>;
@@ -45,9 +43,6 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          {
-    /* Public Routes with Navbar/Footer */
-  }
           <Route element={<RootLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductListingPage />} />
@@ -59,42 +54,20 @@ function App() {
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
-            
-            {
-    /* Protected Customer Routes */
-  }
             <Route element={<ProtectedRoute allowedRoles={["CUSTOMER", "ADMIN", "SELLER"]} />}>
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/orders" element={<OrderHistoryPage />} />
             </Route>
-
-            {
-    /* General Pages */
-  }
             <Route path="/about" element={<Placeholder title="About" />} />
             <Route path="/contact" element={<Placeholder title="Contact" />} />
             <Route path="/terms" element={<Placeholder title="Terms" />} />
             <Route path="/privacy" element={<Placeholder title="Privacy" />} />
-            
-            {
-    /* 404 */
-  }
             <Route path="*" element={<NotFoundPage />} />
           </Route>
-
-          {
-    /* Auth Routes */
-  }
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<SignupPage />} />
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="otp-verification" element={<OTPVerificationPage />} />
           </Route>
-
-          {
-    /* Seller Dashboard Routes */
-  }
           <Route path="/seller" element={<ProtectedRoute allowedRoles={["SELLER", "ADMIN"]} />}>
             <Route element={<DashboardLayout />}>
               <Route path="dashboard" element={<SellerDashboardPage />} />
@@ -107,10 +80,6 @@ function App() {
               <Route path="settings" element={<SellerSettingsPage />} />
             </Route>
           </Route>
-
-          {
-    /* Admin Dashboard Routes */
-  }
           <Route path="/admin" element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
             <Route element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboardPage />} />

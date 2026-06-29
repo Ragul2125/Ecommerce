@@ -41,10 +41,6 @@ function SellerCustomersPage() {
         <h1 className="text-3xl font-black tracking-tight font-heading">Active Customers</h1>
         <p className="text-sm text-muted-foreground">Monitor loyal shoppers and total spending logs.</p>
       </div>
-
-      {
-    /* Toolbar */
-  }
       <div className="relative max-w-md">
         <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-muted-foreground" />
         <Input
@@ -54,10 +50,6 @@ function SellerCustomersPage() {
     className="pl-10 h-12 rounded-2xl bg-muted/30 border-border/50 focus-visible:bg-background"
   />
       </div>
-
-      {
-    /* Customer List Card Grid & Table */
-  }
       <div className="glass rounded-[2rem] overflow-hidden border border-border/40 shadow-premium">
         {filteredCustomers.length === 0 ? <div className="p-16 text-center space-y-4 bg-background/50">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground">

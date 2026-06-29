@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Filter, ChevronRight } from "lucide-react";
+import { Filter, ChevronRight, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { productService } from "@/features/products/services/productService";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { cn } from "@/lib/utils";
@@ -13,16 +14,38 @@ function ProductListingPage() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sort, setSort] = useState("");
+  const [tempMin, setTempMin] = useState("");
+  const [tempMax, setTempMax] = useState("");
+  const [tempSort, setTempSort] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
+      setPage(1);
       try {
-        const [prods, cats] = await Promise.all([
-          productService.getProducts(categorySlug ? { category: categorySlug } : void 0),
+        const query = { page: 1, limit: 12 };
+        if (categorySlug) query.category = categorySlug;
+        if (minPrice) query.minPrice = minPrice;
+        if (maxPrice) query.maxPrice = maxPrice;
+        if (sort) query.sort = sort;
+        const [prodsData, cats] = await Promise.all([
+          productService.getProducts(query),
           productService.getCategories()
         ]);
+        const prods = prodsData.products ? prodsData.products : prodsData;
         setProducts(prods);
         setCategories(cats);
+        if (prodsData.pagination) {
+          setHasMore(prodsData.pagination.page < prodsData.pagination.totalPages);
+        } else {
+          setHasMore(false);
+        }
       } catch (error) {
         console.error("Failed to load products", error);
       } finally {
@@ -30,13 +53,53 @@ function ProductListingPage() {
       }
     }
     loadData();
-  }, [categorySlug]);
+  }, [categorySlug, minPrice, maxPrice, sort]);
+  const handleLoadMore = async () => {
+    if (isLoadingMore || !hasMore) return;
+    setIsLoadingMore(true);
+    const nextPage = page + 1;
+    try {
+      const query = { page: nextPage, limit: 12 };
+      if (categorySlug) query.category = categorySlug;
+      if (minPrice) query.minPrice = minPrice;
+      if (maxPrice) query.maxPrice = maxPrice;
+      if (sort) query.sort = sort;
+      const prodsData = await productService.getProducts(query);
+      const prods = prodsData.products ? prodsData.products : prodsData;
+      setProducts((prev) => [...prev, ...prods]);
+      setPage(nextPage);
+      if (prodsData.pagination) {
+        setHasMore(prodsData.pagination.page < prodsData.pagination.totalPages);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Failed to load more products", error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
   const handleCategorySelect = (slug) => {
     if (slug) {
       setSearchParams({ category: slug });
     } else {
       setSearchParams({});
     }
+  };
+  const applyFilters = () => {
+    setMinPrice(tempMin);
+    setMaxPrice(tempMax);
+    setSort(tempSort);
+    setIsFilterOpen(false);
+  };
+  const clearFilters = () => {
+    setTempMin("");
+    setTempMax("");
+    setTempSort("");
+    setMinPrice("");
+    setMaxPrice("");
+    setSort("");
+    setIsFilterOpen(false);
   };
   const container = {
     hidden: { opacity: 0 },
@@ -52,9 +115,6 @@ function ProductListingPage() {
     show: { opacity: 1, y: 0 }
   };
   return <div className="flex flex-col gap-10 pb-32">
-      {
-    /* 1. Curated Header & Category Filter */
-  }
       <section className="px-6 pt-10 space-y-10">
         <motion.div
     initial={{ opacity: 0, y: -20 }}
@@ -72,24 +132,72 @@ function ProductListingPage() {
                  </p>
               </div>
            </div>
-           
            <div className="flex items-center gap-4">
               <div className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/80 border border-border/10 px-4 py-2 rounded-full">
                  {products.length} Artifacts
               </div>
-              <Button
-    variant="outline"
-    size="icon"
-    className="rounded-full h-12 w-12 border-border/10 bg-white dark:bg-zinc-800 shadow-premium hover:scale-105 active:scale-95 transition-all"
-  >
-                 <Filter className="h-4 w-4" />
-              </Button>
+              <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full h-12 w-12 border-border/10 bg-white dark:bg-zinc-800 shadow-premium hover:scale-105 active:scale-95 transition-all relative"
+                    onClick={() => {
+                      setTempMin(minPrice);
+                      setTempMax(maxPrice);
+                      setTempSort(sort);
+                    }}
+                  >
+                     <Filter className="h-4 w-4" />
+                     {(minPrice || maxPrice || sort) && (
+                        <span className="absolute top-0 right-0 h-3 w-3 rounded-full bg-primary border-2 border-background" />
+                     )}
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="rounded-[2.5rem] max-w-md p-8 border border-border/30 bg-background/95 backdrop-blur-3xl shadow-premium">
+                  <DialogHeader>
+                    <DialogTitle className="font-heading text-2xl font-black uppercase tracking-tight italic">Refine Curations</DialogTitle>
+                  </DialogHeader>
+                  <div className="mt-6 space-y-8">
+                    <div className="space-y-4">
+                      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Price Valuation (₹)</h4>
+                      <div className="flex items-center gap-4">
+                        <input 
+                          type="number" 
+                          placeholder="Min" 
+                          value={tempMin} 
+                          onChange={e => setTempMin(e.target.value)}
+                          className="w-full h-12 rounded-2xl bg-muted/40 border border-border/60 px-4 text-sm font-bold text-foreground focus:outline-none focus:border-primary/50"
+                        />
+                        <span className="text-muted-foreground font-black">—</span>
+                        <input 
+                          type="number" 
+                          placeholder="Max" 
+                          value={tempMax} 
+                          onChange={e => setTempMax(e.target.value)}
+                          className="w-full h-12 rounded-2xl bg-muted/40 border border-border/60 px-4 text-sm font-bold text-foreground focus:outline-none focus:border-primary/50"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+                        <ArrowUpDown className="h-3 w-3" /> Sorting Architecture
+                      </h4>
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button variant={tempSort === "price_asc" ? "default" : "outline"} onClick={() => setTempSort("price_asc")} className={cn("h-12 rounded-xl text-[10px] font-black uppercase tracking-wider", tempSort === "price_asc" ? "" : "opacity-60")}>Price: Low to High</Button>
+                        <Button variant={tempSort === "price_desc" ? "default" : "outline"} onClick={() => setTempSort("price_desc")} className={cn("h-12 rounded-xl text-[10px] font-black uppercase tracking-wider", tempSort === "price_desc" ? "" : "opacity-60")}>Price: High to Low</Button>
+                        <Button variant={tempSort === "newest" ? "default" : "outline"} onClick={() => setTempSort("newest")} className={cn("h-12 rounded-xl text-[10px] font-black uppercase tracking-wider col-span-2", tempSort === "newest" ? "" : "opacity-60")}>Newest Arrivals</Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-10 flex gap-3">
+                    <Button variant="ghost" onClick={clearFilters} className="flex-1 h-14 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-muted">Reset</Button>
+                    <Button onClick={applyFilters} className="flex-1 h-14 rounded-full bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest shadow-xl active:scale-[0.98]">Apply Filters</Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
            </div>
         </motion.div>
-
-        {
-    /* Horizontal Category Navigation */
-  }
         <div className="relative">
           <div className="flex gap-3 overflow-x-auto pb-6 no-scrollbar mask-fade-right">
             <Button
@@ -114,18 +222,11 @@ function ProductListingPage() {
                 {cat.name}
               </Button>)}
           </div>
-          {
-    /* Scroll Right Indicator */
-  }
           <div className="absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-background via-background/80 to-transparent flex items-center justify-end pointer-events-none pr-1">
              <ChevronRight className="h-5 w-5 text-muted-foreground animate-pulse" />
           </div>
         </div>
       </section>
-
-      {
-    /* 2. Intelligent Product Grid */
-  }
       <section className="px-6 min-h-[60vh]">
         <AnimatePresence mode="wait">
           {isLoading ? <motion.div
@@ -174,16 +275,14 @@ function ProductListingPage() {
             </motion.div>}
         </AnimatePresence>
       </section>
-
-      {
-    /* 3. Subtle Pagination / Load More (Placeholder) */
-  }
-      {!isLoading && products.length > 0 && <div className="flex justify-center pt-20">
+      {!isLoading && hasMore && <div className="flex justify-center pt-20">
             <Button
     variant="outline"
+    onClick={handleLoadMore}
+    disabled={isLoadingMore}
     className="rounded-full px-12 h-16 border-border/20 text-[10px] font-black uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity"
   >
-               Load More Artifacts
+               {isLoadingMore ? "Loading..." : "Load More Artifacts"}
             </Button>
          </div>}
     </div>;

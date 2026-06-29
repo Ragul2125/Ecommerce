@@ -73,10 +73,6 @@ function SellerProductsPage() {
           </Link>
         </Button>
       </div>
-
-      {
-    /* Filters Toolbar */
-  }
       <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-muted-foreground" />
@@ -87,7 +83,6 @@ function SellerProductsPage() {
     className="pl-10 h-12 rounded-2xl bg-muted/30 border-border/50 focus-visible:bg-background"
   />
         </div>
-        
         <div className="flex items-center gap-3">
           <SlidersHorizontal className="h-4 w-4 text-muted-foreground shrink-0" />
           <div className="flex flex-wrap gap-2">
@@ -101,10 +96,6 @@ function SellerProductsPage() {
           </div>
         </div>
       </div>
-
-      {
-    /* Product List */
-  }
       <div className="glass rounded-[2rem] overflow-hidden shadow-premium border border-border/40">
         {filteredProducts.length === 0 ? <div className="p-16 text-center space-y-4">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground">

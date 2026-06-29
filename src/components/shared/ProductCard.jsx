@@ -38,10 +38,6 @@ function ProductCard({ product, className }) {
     alt={product.name}
     className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
   />
-        
-        {
-    /* Quick Add Overlay */
-  }
         <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hidden md:block z-20 ">
            <button
     onClick={handleQuickAdd}
@@ -51,10 +47,6 @@ function ProductCard({ product, className }) {
               Quick Acquisition
            </button>
         </div>
-
-        {
-    /* Wishlist Button */
-  }
         <div className="absolute top-2 right-2 z-10">
            <button
     onClick={handleWishlistClick}
@@ -66,10 +58,6 @@ function ProductCard({ product, className }) {
               <Heart className={cn("h-4 w-4", isFavorite && "fill-current animate-pulse")} />
            </button>
         </div>
-
-        {
-    /* Badges */
-  }
         <div className="absolute left-4 top-4 flex flex-col gap-2">
            {product.salePrice && <div className="bg-secondary text-secondary-foreground rounded-full px-4 py-1.5 text-[8px] font-black tracking-[0.2em] uppercase shadow-premium backdrop-blur-md bg-opacity-90">
                  -{Math.round((1 - product.salePrice / product.price) * 100)}%
@@ -78,21 +66,15 @@ function ProductCard({ product, className }) {
                  Pioneer
               </div>}
         </div>
-
-        {
-    /* Rating Floating */
-  }
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-premium group-hover:opacity-0 transition-opacity duration-300">
            <Star className="h-3 w-3 text-black fill-black" />
            <span className="text-[10px] font-black text-black tracking-tighter">{product.rating}</span>
         </div>
       </div>
-      
       <div className="px-3 pb-2 space-y-2 cursor-pointer">
         <h3 className="font-black text-[11px] uppercase tracking-[0.1em] leading-tight text-foreground/60 line-clamp-2 min-h-[1.5rem] group-hover:text-primary transition-colors">
           {product.name}
         </h3>
-        
         <div className="flex items-end justify-between gap-2 ">
           <div className="flex flex-col gap-0.5">
             {product.salePrice && <span className="text-[9px] font-black text-muted-foreground/50 line-through tracking-widest leading-none">
@@ -103,12 +85,6 @@ function ProductCard({ product, className }) {
               {(product.salePrice || product.price).toLocaleString()}
             </span>
           </div>
-          
-          {
-    /* <div className="text-[8px] text-muted-foreground/70 font-black uppercase tracking-[0.2em] pr-3 text-center">
-       {product.soldCount || 0} Circulated
-    </div> */
-  }
         </div>
       </div>
     </Link>;

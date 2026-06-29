@@ -71,10 +71,6 @@ function SellerOrdersPage() {
         <h1 className="text-3xl font-black tracking-tight font-heading">Manage Orders</h1>
         <p className="text-sm text-muted-foreground">Fulfill, ship, and coordinate client deliveries.</p>
       </div>
-
-      {
-    /* Tabs */
-  }
       <div className="flex border-b border-border/50 overflow-x-auto no-scrollbar gap-8">
         {tabs.map((tab) => {
     const count = tab === "All" ? orders.length : orders.filter((o) => o.status === tab).length;
@@ -87,14 +83,7 @@ function SellerOrdersPage() {
             </button>;
   })}
       </div>
-
-      {
-    /* Content Layout */
-  }
       <div className="grid gap-6 lg:grid-cols-3">
-        {
-    /* Orders list */
-  }
         <div className="lg:col-span-2 space-y-4">
           <div className="glass rounded-[2rem] overflow-hidden border border-border/40 shadow-premium">
             {filteredOrders.length === 0 ? <div className="p-16 text-center space-y-4 bg-background/50">
@@ -150,10 +139,6 @@ function SellerOrdersPage() {
               </div>}
           </div>
         </div>
-
-        {
-    /* Selected Order Detail Side Sheet */
-  }
         <div className="space-y-4">
           {selectedOrder ? <div className="glass rounded-[2rem] border border-border/40 p-6 shadow-premium space-y-6 bg-background/50 animate-in slide-in-from-right duration-300">
               <div className="flex items-center justify-between border-b pb-4">
@@ -165,10 +150,6 @@ function SellerOrdersPage() {
                   {selectedOrder.status}
                 </span>
               </div>
-
-              {
-    /* Items List */
-  }
               <div className="space-y-4">
                 <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Curated Pieces</h4>
                 <div className="space-y-3">
@@ -185,10 +166,6 @@ function SellerOrdersPage() {
                   <span>₹{selectedOrder.total.toLocaleString()}</span>
                 </div>
               </div>
-
-              {
-    /* Shipping Address */
-  }
               <div className="space-y-2 border-t pt-4">
                 <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Customer Profile</h4>
                 <p className="text-xs font-bold text-foreground">{selectedOrder.customer}</p>
@@ -196,10 +173,6 @@ function SellerOrdersPage() {
                   12, Crescent Road, Bangalore, Karnataka - 560001, India
                 </p>
               </div>
-
-              {
-    /* Change status buttons */
-  }
               {selectedOrder.status !== "Cancelled" && <div className="space-y-2 border-t pt-4">
                   <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-3">Dispatch Logistics</h4>
                   <div className="grid grid-cols-2 gap-2">

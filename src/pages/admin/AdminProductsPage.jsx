@@ -46,10 +46,6 @@ function AdminProductsPage() {
           <p className="text-sm text-muted-foreground">Review and manage all products across the site.</p>
         </div>
       </div>
-
-      {
-    /* Filters Toolbar */
-  }
       <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-muted-foreground" />
@@ -61,10 +57,6 @@ function AdminProductsPage() {
   />
         </div>
       </div>
-
-      {
-    /* Products List */
-  }
       <div className="glass rounded-[2rem] overflow-hidden shadow-premium border border-border/40 bg-card">
         {filteredProducts.length === 0 ? <div className="p-16 text-center space-y-4">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground mx-auto">
@@ -135,7 +127,6 @@ function AdminProductsPage() {
             </table>
           </div>}
       </div>
-
       <Dialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
         <DialogContent>
           <DialogHeader>

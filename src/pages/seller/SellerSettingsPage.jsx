@@ -74,17 +74,12 @@ function SellerSettingsPage() {
         <h1 className="text-3xl font-black tracking-tight font-heading">Store Settings</h1>
         <p className="text-sm text-muted-foreground">Configure profile parameters, contacts, currency, and shipping metrics.</p>
       </div>
-
       <form onSubmit={handleSubmit} className="space-y-8">
-        {
-    /* Core Store Info */
-  }
         <div className="glass rounded-[2.5rem] p-8 border border-border/40 shadow-premium space-y-6 bg-background/50">
           <div className="space-y-4">
             <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2 flex items-center gap-2">
               <Store className="h-4 w-4" /> Identity & Profile
             </h3>
-            
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Boutique Name</label>
@@ -96,7 +91,6 @@ function SellerSettingsPage() {
     required
   />
               </div>
-
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Support Email</label>
                 <Input
@@ -108,7 +102,6 @@ function SellerSettingsPage() {
     required
   />
               </div>
-
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Support Hot-line</label>
                 <Input
@@ -119,7 +112,6 @@ function SellerSettingsPage() {
     required
   />
               </div>
-
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Store Currency</label>
                 <select
@@ -133,7 +125,6 @@ function SellerSettingsPage() {
                 </select>
               </div>
             </div>
-
             <div className="space-y-2">
               <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Physical Dispatch Address</label>
               <textarea
@@ -146,15 +137,10 @@ function SellerSettingsPage() {
   />
             </div>
           </div>
-
-          {
-    /* Logistics Settings */
-  }
           <div className="space-y-4 pt-4 border-t border-border/40">
             <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2 flex items-center gap-2">
               <Truck className="h-4 w-4" /> Logistics & Customization
             </h3>
-
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Flat Shipping Rate (₹)</label>
@@ -167,7 +153,6 @@ function SellerSettingsPage() {
     required
   />
               </div>
-
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Standard Store GST/Tax (%)</label>
                 <Input
@@ -181,10 +166,6 @@ function SellerSettingsPage() {
               </div>
             </div>
           </div>
-
-          {
-    /* Warnings and alerts */
-  }
           <div className="p-4 rounded-3xl bg-amber-500/10 border border-amber-500/20 flex gap-4 text-amber-700 dark:text-amber-500 items-start">
             <ShieldAlert className="h-5 w-5 shrink-0 mt-0.5" />
             <div className="space-y-1">
@@ -195,10 +176,6 @@ function SellerSettingsPage() {
             </div>
           </div>
         </div>
-
-        {
-    /* Save button */
-  }
         <div className="flex items-center justify-end">
           <Button
     type="submit"

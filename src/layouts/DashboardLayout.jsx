@@ -29,9 +29,6 @@ function DashboardLayout() {
     { name: "Settings", href: "/seller/settings", icon: Settings }
   ];
   return <div className="flex min-h-screen bg-muted/20">
-      {
-    /* Sidebar */
-  }
       <aside className="hidden w-64 flex-col border-r bg-background md:flex">
         <div className="flex h-16 items-center border-b px-6">
           <Link to="/" className="flex items-center gap-2">
@@ -43,7 +40,6 @@ function DashboardLayout() {
             </span>
           </Link>
         </div>
-        
         <div className="flex-1 overflow-auto py-4">
           <nav className="grid gap-1 px-4 text-sm font-medium">
             {navItems.map((item) => {
@@ -59,7 +55,6 @@ function DashboardLayout() {
   })}
           </nav>
         </div>
-        
         <div className="border-t p-4">
           <div className="flex items-center gap-3 rounded-lg p-2">
             <Avatar>
@@ -76,14 +71,7 @@ function DashboardLayout() {
           </div>
         </div>
       </aside>
-      
-      {
-    /* Main Content */
-  }
       <div className="flex flex-1 flex-col">
-        {
-    /* Top Header */
-  }
         <header className="flex h-16 items-center justify-between border-b bg-background px-4 md:px-6">
           <div className="flex items-center gap-4 md:hidden">
             <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(true)} className="cursor-pointer">
@@ -91,7 +79,6 @@ function DashboardLayout() {
             </Button>
             <span className="font-heading font-bold">Seller Hub</span>
           </div>
-          
           <div className="hidden flex-1 items-center gap-4 md:flex">
             <div className="relative w-full max-w-sm">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -102,7 +89,6 @@ function DashboardLayout() {
   />
             </div>
           </div>
-          
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
@@ -110,29 +96,15 @@ function DashboardLayout() {
             </Button>
           </div>
         </header>
-        
-        {
-    /* Page Content */
-  }
         <main className="flex-1 p-4 md:p-8">
           <Outlet />
         </main>
       </div>
-
-      {
-    /* Mobile Drawer Navigation Overlay */
-  }
       {isMobileMenuOpen && <div className="fixed inset-0 z-[200] flex md:hidden">
-          {
-    /* Backdrop */
-  }
           <div
     className="fixed inset-0 bg-background/80 backdrop-blur-md cursor-pointer"
     onClick={() => setIsMobileMenuOpen(false)}
   />
-          {
-    /* Drawer Panel */
-  }
           <aside className="relative flex w-64 flex-col bg-background border-r p-4 animate-in slide-in-from-left duration-300">
             <div className="flex h-16 items-center justify-between px-2 mb-4 border-b">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
@@ -152,7 +124,6 @@ function DashboardLayout() {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            
             <div className="flex-1 overflow-auto py-2">
               <nav className="grid gap-1 px-2 text-sm font-medium">
                 {navItems.map((item) => {
@@ -169,7 +140,6 @@ function DashboardLayout() {
   })}
               </nav>
             </div>
-
             <div className="border-t p-2 mt-auto">
               <div className="flex items-center gap-3 rounded-lg p-2">
                 <Avatar>
@@ -184,10 +154,6 @@ function DashboardLayout() {
             </div>
           </aside>
         </div>}
-
-      {
-    /* Mobile-Only Viewport Blocking Screen */
-  }
       <div className="fixed inset-0 z-[300] bg-background flex flex-col items-center justify-center p-8 text-center md:hidden animate-in fade-in duration-300">
         <div className="max-w-xs space-y-6">
           <div className="h-16 w-16 mx-auto rounded-3xl bg-primary/10 text-primary flex items-center justify-center">

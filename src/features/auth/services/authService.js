@@ -1,5 +1,4 @@
 import api from '../../../lib/api';
-
 const authService = {
   async login(email, password) {
     try {
@@ -15,7 +14,6 @@ const authService = {
       throw new Error('An error occurred during login');
     }
   },
-  
   async signup(data) {
     try {
       const payload = { ...data, role: data.role === "CUSTOMER" ? "USER" : data.role };
@@ -31,11 +29,12 @@ const authService = {
       throw new Error('An error occurred during signup');
     }
   },
-  
   async logout() {
-    // Usually frontend just clears the token in store
-    return Promise.resolve();
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 };
-
 export { authService };

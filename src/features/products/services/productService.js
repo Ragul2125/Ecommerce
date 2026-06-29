@@ -1,89 +1,72 @@
 import api from '../../../lib/api';
 import { mockSuperCategories, mockCategories } from "@/utils/mockData";
-
+const mapProduct = (p) => ({
+  ...p,
+  salePrice: p.sale_price || p.salePrice || null,
+  images: Array.isArray(p.images) ? p.images.map(img => img?.url || img) : [],
+  category: p.category?.name || p.category || "Uncategorized",
+  categoryId: p.category?.id || p.category_id,
+  categorySlug: p.category?.slug,
+  rating: p.rating || 4.5,
+  inStock: p.is_active !== false,
+  isFeatured: p.isFeatured !== undefined ? p.isFeatured : true,
+  isNew: p.isNew !== undefined ? p.isNew : true
+});
 const productService = {
   async getProducts(params) {
     try {
-      const response = await api.get('/products/all');
-      let result = response.data.products || response.data;
-      
-      // Map backend model to frontend model
-      result = result.map(p => ({
-        ...p,
-        salePrice: p.sale_price || p.salePrice || null,
-        images: Array.isArray(p.images) ? p.images.map(img => img?.url || img) : [],
-        category: p.category?.name || p.category || "Uncategorized",
-        categoryId: p.category?.id || p.category_id,
-        categorySlug: p.category?.slug,
-        rating: p.rating || 4.5,
-        inStock: p.is_active !== false,
-        isFeatured: p.isFeatured !== undefined ? p.isFeatured : true,
-        isNew: p.isNew !== undefined ? p.isNew : true
-      }));
-      
-      // We apply frontend filtering if the backend doesn't support query params yet
-      if (params?.category) {
-        result = result.filter(
-          (p) =>
-            (p.categorySlug && p.categorySlug.toLowerCase() === params.category.toLowerCase()) ||
-            (p.category && p.category.toLowerCase() === params.category.toLowerCase()) ||
-            (p.id && p.id.toLowerCase().includes(params.category.toLowerCase()))
-        );
+      const queryParams = new URLSearchParams();
+      if (params?.search) queryParams.append('q', params.search);
+      if (params?.category) queryParams.append('category', params.category);
+      if (params?.minPrice) queryParams.append('min_price', params.minPrice);
+      if (params?.maxPrice) queryParams.append('max_price', params.maxPrice);
+      if (params?.sort) queryParams.append('sort', params.sort);
+      if (params?.page) queryParams.append('page', params.page);
+      if (params?.limit) queryParams.append('limit', params.limit);
+      const response = await api.get(`/products?${queryParams.toString()}`);
+      if (response.data && response.data.products) {
+        return {
+          products: response.data.products.map(mapProduct),
+          pagination: response.data.pagination
+        };
       }
-      if (params?.featured) {
-        // Assume isFeatured flag exists or filter appropriately
-        result = result.filter((p) => p.isFeatured);
-      }
-      if (params?.search) {
-        const q = params.search.toLowerCase();
-        result = result.filter(
-          (p) =>
-            (p.name && p.name.toLowerCase().includes(q)) ||
-            (p.description && p.description.toLowerCase().includes(q))
-        );
-      }
-      return result;
+      let result = response.data || [];
+      return result.map(mapProduct);
     } catch (error) {
       console.error("Failed to fetch products:", error);
       return [];
     }
   },
-  
   async getProductById(id) {
     try {
-      const response = await api.get('/products/all');
-      let products = response.data.products || response.data;
-      
-      products = products.map(p => ({
-        ...p,
-        salePrice: p.sale_price || p.salePrice || null,
-        images: Array.isArray(p.images) ? p.images.map(img => img?.url || img) : [],
-        category: p.category?.name || p.category || "Uncategorized",
-        categoryId: p.category?.id || p.category_id,
-        categorySlug: p.category?.slug,
-        rating: p.rating || 4.5,
-        inStock: p.is_active !== false,
-        isFeatured: p.isFeatured !== undefined ? p.isFeatured : true,
-        isNew: p.isNew !== undefined ? p.isNew : true
-      }));
-      
-      return products.find((p) => p.id === id);
+      const response = await api.get(`/products/${id}`);
+      const productData = response.data.product || response.data;
+      return mapProduct(productData);
     } catch (error) {
       console.error("Failed to fetch product by id:", error);
       return undefined;
     }
   },
-  
+  async getRelatedProducts(id) {
+    try {
+      const response = await api.get(`/products/${id}/related`);
+      const productsData = response.data.products || response.data;
+      if (Array.isArray(productsData)) {
+         return productsData.map(mapProduct);
+      }
+      return [];
+    } catch (error) {
+      console.error("Failed to fetch related products:", error);
+      return [];
+    }
+  },
   async getCategories(superCategoryId) {
     try {
       const response = await api.get('/categories');
       let categories = response.data;
-      
       if (superCategoryId) {
-        // If backend category has superCategoryId, filter it. Else we just return mock categories for this
-        // to not break the UI if backend schema is different.
-        if (categories.some(c => c.superCategoryId !== undefined)) {
-            return categories.filter((c) => c.superCategoryId === superCategoryId);
+        if (categories.some(c => c.super_category_id !== undefined)) {
+            return categories.filter((c) => c.super_category_id === superCategoryId);
         } else {
             return mockCategories.filter((c) => c.superCategoryId === superCategoryId);
         }
@@ -94,11 +77,14 @@ const productService = {
       return mockCategories; // fallback to mock if api fails
     }
   },
-  
   async getSuperCategories() {
-    // Backend doesn't seem to have super categories yet, so return mock data
-    return mockSuperCategories;
+    try {
+      const response = await api.get('/super-categories');
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch super categories:", error);
+      return mockSuperCategories;
+    }
   }
 };
-
 export { productService };

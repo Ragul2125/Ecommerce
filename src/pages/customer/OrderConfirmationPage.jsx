@@ -14,9 +14,6 @@ function OrderConfirmationPage() {
   const { user } = useAuthStore();
   const orderNumber = "AQ-" + Math.floor(1e5 + Math.random() * 9e5);
   return <div className="flex flex-col items-center justify-center min-h-[90vh] px-6 gap-12 pb-40">
-       {
-    /* 1. Celebratory Architecture */
-  }
        <div className="relative">
           <motion.div
     initial={{ scale: 0, rotate: -20 }}
@@ -28,7 +25,6 @@ function OrderConfirmationPage() {
                 <Check className="h-12 w-12 md:h-16 md:w-16 text-primary-foreground stroke-[4]" />
              </div>
           </motion.div>
-          
           <motion.div
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -42,7 +38,6 @@ function OrderConfirmationPage() {
     className="absolute -bottom-4 -left-4 h-6 w-6 rounded-full bg-zinc-400 opacity-40"
   />
        </div>
-
        <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -54,10 +49,6 @@ function OrderConfirmationPage() {
              Secure confirmation of your curated artifacts. Preparation of logistics is underway.
           </p>
        </motion.div>
-
-       {
-    /* 2. Premium Audit Receipt */
-  }
        <motion.div
     initial={{ opacity: 0, scale: 0.98 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -65,7 +56,6 @@ function OrderConfirmationPage() {
   >
           <div className="absolute top-0 right-0 h-48 w-48 bg-primary/10 blur-3xl -mr-24 -mt-24" />
           <div className="absolute bottom-0 left-0 h-48 w-48 bg-white/5 blur-3xl -ml-24 -mb-24" />
-          
           <div className="space-y-6 relative z-10">
              <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
                 <span>Transaction UID</span>
@@ -76,7 +66,6 @@ function OrderConfirmationPage() {
                 <span className="text-4xl font-black text-primary-foreground tracking-tighter">₹{orderTotal.toLocaleString()}</span>
              </div>
           </div>
-
           <div className="pt-8 border-t border-primary-foreground/10 space-y-3 relative z-10">
              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">Logistics Destination</p>
              <div className="space-y-1">
@@ -98,10 +87,6 @@ function OrderConfirmationPage() {
              </div>
           </div>
        </motion.div>
-
-       {
-    /* 3. Navigation Controls */
-  }
        <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}

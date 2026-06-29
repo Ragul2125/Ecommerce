@@ -58,10 +58,6 @@ function AdminOrdersPage() {
           <p className="text-sm text-muted-foreground">Monitor and update customer orders.</p>
         </div>
       </div>
-
-      {
-    /* Filters Toolbar */
-  }
       <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-muted-foreground" />
@@ -85,10 +81,6 @@ function AdminOrdersPage() {
           </div>
         </div>
       </div>
-
-      {
-    /* Orders List */
-  }
       <div className="glass rounded-[2rem] overflow-hidden shadow-premium border border-border/40 bg-card">
         {filteredOrders.length === 0 ? <div className="p-16 text-center space-y-4">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground mx-auto">
@@ -157,10 +149,6 @@ function AdminOrdersPage() {
             </table>
           </div>}
       </div>
-
-      {
-    /* View Order Modal */
-  }
       <Dialog open={!!viewOrder} onOpenChange={(open) => !open && setViewOrder(null)}>
         <DialogContent>
           <DialogHeader>
@@ -194,10 +182,6 @@ function AdminOrdersPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {
-    /* Edit Status Modal */
-  }
       <Dialog open={!!editOrder} onOpenChange={(open) => !open && setEditOrder(null)}>
         <DialogContent>
           <DialogHeader>

@@ -83,10 +83,6 @@ function AdminCategoriesPage() {
           <Plus className="mr-2 h-4 w-4" /> Add Category
         </Button>
       </div>
-
-      {
-    /* Filters Toolbar */
-  }
       <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-muted-foreground" />
@@ -98,10 +94,6 @@ function AdminCategoriesPage() {
   />
         </div>
       </div>
-
-      {
-    /* Categories List */
-  }
       <div className="glass rounded-[2rem] overflow-hidden shadow-premium border border-border/40 bg-card">
         {filteredCategories.length === 0 ? <div className="p-16 text-center space-y-4">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground mx-auto">
@@ -163,10 +155,6 @@ function AdminCategoriesPage() {
             </table>
           </div>}
       </div>
-
-      {
-    /* Add Modal */
-  }
       <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
         <DialogContent>
           <DialogHeader>
@@ -212,10 +200,6 @@ function AdminCategoriesPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {
-    /* Edit Modal */
-  }
       <Dialog open={!!editCategory} onOpenChange={(open) => !open && setEditCategory(null)}>
         <DialogContent>
           <DialogHeader>
@@ -261,10 +245,6 @@ function AdminCategoriesPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {
-    /* Delete Confirmation Modal */
-  }
       <Dialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
         <DialogContent>
           <DialogHeader>

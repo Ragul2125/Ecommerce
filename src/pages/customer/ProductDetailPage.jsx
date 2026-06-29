@@ -85,8 +85,8 @@ function ProductDetailPage() {
         const data = await productService.getProductById(id);
         if (data) {
           setProduct(data);
-          const related = await productService.getProducts({ category: data.category });
-          setRelatedProducts(related.filter((p) => p.id !== data.id).slice(0, 4));
+          const related = await productService.getRelatedProducts(data.id);
+          setRelatedProducts(related.slice(0, 4));
         }
       } catch (error) {
         console.error("Failed to load product", error);
@@ -125,9 +125,6 @@ function ProductDetailPage() {
       </div>;
   }
   return <div className="flex flex-col gap-0 pb-40">
-      {
-    /* 1. Refined Header */
-  }
       <div className="sticky top-0 z-50 flex items-center justify-between px-6 py-6 bg-background/60 backdrop-blur-2xl">
         <div className="flex items-center gap-3">
           <Button
@@ -139,7 +136,6 @@ function ProductDetailPage() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </div>
-        
         <div className="flex items-center gap-3">
            <Button
     variant="ghost"
@@ -151,10 +147,6 @@ function ProductDetailPage() {
            </Button>
         </div>
       </div>
-
-      {
-    /* 2. Editorial Gallery Area */
-  }
       <section className="relative aspect-[4/5] w-full bg-muted/20 overflow-hidden px-4 md:px-20 md:py-10">
          <motion.img
     initial={{ opacity: 0, scale: 1.05 }}
@@ -164,7 +156,6 @@ function ProductDetailPage() {
     alt={product.name}
     className="h-full w-full object-cover rounded-[3rem] shadow-2xl"
   />
-         
          <div className="absolute bottom-10 inset-x-0 flex justify-center gap-3">
             {product.images.map((_, i) => <button
     key={i}
@@ -176,10 +167,6 @@ function ProductDetailPage() {
   />)}
          </div>
       </section>
-
-      {
-    /* 3. Product Info Reveal */
-  }
       <section className="bg-background relative z-20 px-8 pt-12 space-y-10">
         <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -209,7 +196,6 @@ function ProductDetailPage() {
              <div className="text-[10px] font-black uppercase tracking-widest text-primary/40 mt-2">Inclusive of all taxes</div>
           </div>
         </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div className="space-y-4">
@@ -228,7 +214,6 @@ function ProductDetailPage() {
                     </button>)}
                </div>
             </div>
-
             <div className="space-y-4">
                <div className="flex items-center justify-between ">
                  <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">Select Size</h3>
@@ -293,7 +278,6 @@ function ProductDetailPage() {
                </div>
             </div>
           </div>
-
           <div className="space-y-4">
             <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">The Narrative</h3>
             <p className="text-sm text-muted-foreground/80 leading-relaxed font-medium">
@@ -311,10 +295,6 @@ function ProductDetailPage() {
             </div>
           </div>
         </div>
-
-        {
-    /* 4. Communal Proof */
-  }
         <div className="py-12 border-y border-border/50">
            <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
               <div className="space-y-2">
@@ -407,7 +387,6 @@ function ProductDetailPage() {
                  </DialogContent>
                </Dialog>
             </div>
-            
               <div className="relative">
                 <div
     ref={scrollContainerRef}
@@ -443,10 +422,6 @@ function ProductDetailPage() {
                   </div>}
               </div>
          </div>
-
-        {
-    /* 5. Related Collections */
-  }
         {relatedProducts.length > 0 && <div className="pt-20 pb-20">
             <h2 className="text-3xl font-black font-heading mb-12 tracking-tighter leading-none">Related Collections.</h2>
             <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
@@ -454,10 +429,6 @@ function ProductDetailPage() {
             </div>
           </div>}
       </section>
-
-      {
-    /* 6. Sticky High-Performance Action Bar */
-  }
       <motion.div
     initial={{ y: 100 }}
     animate={{ y: 0 }}
@@ -468,7 +439,6 @@ function ProductDetailPage() {
               <span className="text-[9px] font-black uppercase tracking-widest opacity-50">Curated Total</span>
               <span className="text-lg font-black leading-none text-primary-foreground">₹{(product.salePrice || product.price).toLocaleString()}</span>
            </div>
-           
            <div className="flex items-center gap-3 w-full sm:w-auto">
               <button
     onClick={handleWishlistClick}

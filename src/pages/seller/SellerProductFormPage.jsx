@@ -120,16 +120,10 @@ function SellerProductFormPage() {
           </p>
         </div>
       </div>
-
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="glass rounded-[2.5rem] p-8 border border-border/40 shadow-premium space-y-6 bg-background/50">
-          
-          {
-    /* Main Info */
-  }
           <div className="space-y-4">
             <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2">Narrative & Identity</h3>
-            
             <div className="space-y-2">
               <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Product Name</label>
               <Input
@@ -140,7 +134,6 @@ function SellerProductFormPage() {
     required
   />
             </div>
-
             <div className="space-y-2">
               <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Verbal Narrative (Description)</label>
               <textarea
@@ -153,14 +146,9 @@ function SellerProductFormPage() {
   />
             </div>
           </div>
-
-          {
-    /* Pricing & Logistics */
-  }
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-4">
               <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2">Logistics & Value</h3>
-              
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Original Price (₹)</label>
                 <Input
@@ -172,7 +160,6 @@ function SellerProductFormPage() {
     required
   />
               </div>
-
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Sale Price (₹ - Optional)</label>
                 <Input
@@ -184,10 +171,8 @@ function SellerProductFormPage() {
   />
               </div>
             </div>
-
             <div className="space-y-4">
               <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2">Classification</h3>
-              
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Category</label>
                 <select
@@ -201,10 +186,6 @@ function SellerProductFormPage() {
                   <option value="New Arrivals">New Arrivals</option>
                 </select>
               </div>
-
-              {
-    /* Status Toggles */
-  }
               <div className="pt-2 grid grid-cols-3 gap-2">
                 <button
     type="button"
@@ -230,13 +211,8 @@ function SellerProductFormPage() {
               </div>
             </div>
           </div>
-
-          {
-    /* Images Curator */
-  }
           <div className="space-y-4">
             <h3 className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground border-b pb-2">Visual Editorial Assets</h3>
-            
             <div className="space-y-2">
               <label className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Add Image URL</label>
               <div className="flex gap-3">
@@ -255,10 +231,6 @@ function SellerProductFormPage() {
                 </Button>
               </div>
             </div>
-
-            {
-    /* Previews grid */
-  }
             {images.length > 0 ? <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
                 {images.map((img, i) => <div key={i} className="group relative aspect-square rounded-2xl border overflow-hidden bg-muted shadow-sm border-border/40">
                     <img src={img} alt={`Preview ${i}`} className="h-full w-full object-cover" />
@@ -276,10 +248,6 @@ function SellerProductFormPage() {
               </div>}
           </div>
         </div>
-
-        {
-    /* Form Actions */
-  }
         <div className="flex items-center justify-end gap-4">
           <Button
     type="button"

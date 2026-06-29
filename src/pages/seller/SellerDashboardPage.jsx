@@ -42,10 +42,6 @@ function SellerDashboardPage() {
   }
   return <div className="space-y-6 animate-in fade-in-50 duration-500">
       <h1 className="text-3xl font-bold tracking-tight font-heading">Dashboard Overview</h1>
-      
-      {
-    /* Stats Cards */
-  }
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -64,7 +60,6 @@ function SellerDashboardPage() {
             </p>
           </CardContent>
         </Card>
-        
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Orders</CardTitle>
@@ -80,7 +75,6 @@ function SellerDashboardPage() {
             </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Active Products</CardTitle>
@@ -93,7 +87,6 @@ function SellerDashboardPage() {
             </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Active Customers</CardTitle>
@@ -110,11 +103,7 @@ function SellerDashboardPage() {
           </CardContent>
         </Card>
       </div>
-
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        {
-    /* Chart */
-  }
         <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Revenue Overview</CardTitle>
@@ -148,10 +137,6 @@ function SellerDashboardPage() {
             </div>
           </CardContent>
         </Card>
-
-        {
-    /* Recent Orders */
-  }
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Recent Orders</CardTitle>

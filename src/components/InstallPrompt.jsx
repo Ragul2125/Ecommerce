@@ -45,7 +45,6 @@ function InstallPrompt() {
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
         <span className="font-bold font-heading">E</span>
       </div>
-      
       <div className="flex-1">
         <h4 className="font-medium text-sm">Install Ecommerce App</h4>
         <p className="text-xs text-muted-foreground mt-1">
@@ -60,7 +59,6 @@ function InstallPrompt() {
           </Button>
         </div>
       </div>
-      
       <button
     onClick={handleDismiss}
     className="shrink-0 text-muted-foreground hover:text-foreground"

@@ -10,7 +10,7 @@ import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "@/lib/api";
-
+import { userService } from "@/services/userService";
 function ProfilePage() {
   const navigate = useNavigate();
   const { user, token, setAuth, logout } = useAuthStore();
@@ -20,7 +20,6 @@ function ProfilePage() {
   const [email, setEmail] = useState("");
   const [addresses, setAddresses] = useState([]);
   const [isLoadingAddresses, setIsLoadingAddresses] = useState(true);
-
   useEffect(() => {
     if (user) {
       setFirstName(user.name.split(" ")[0] || "");
@@ -29,13 +28,12 @@ function ProfilePage() {
       fetchAddresses();
     }
   }, [user]);
-
   const fetchAddresses = async () => {
     try {
       setIsLoadingAddresses(true);
-      const res = await api.get("/users/addresses");
-      if (Array.isArray(res.data)) {
-        setAddresses(res.data);
+      const data = await userService.getAddresses();
+      if (Array.isArray(data)) {
+        setAddresses(data);
       }
     } catch (err) {
       console.error("Failed to fetch addresses:", err);
@@ -43,15 +41,18 @@ function ProfilePage() {
       setIsLoadingAddresses(false);
     }
   };
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
       toast.error("Please fill in all fields.");
       return;
     }
     setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
+    try {
+      await userService.updateProfile({ 
+        name: `${firstName.trim()} ${lastName.trim()}`, 
+        email: email.trim() 
+      });
       if (user && token) {
         setAuth({
           ...user,
@@ -60,7 +61,11 @@ function ProfilePage() {
         }, token);
       }
       toast.success("Profile updated successfully");
-    }, 1e3);
+    } catch (error) {
+      toast.error("Failed to update profile");
+    } finally {
+      setIsSaving(false);
+    }
   };
   const handleLogout = () => {
     logout();
@@ -79,9 +84,6 @@ function ProfilePage() {
     }
   };
   return <div className="flex flex-col gap-10 pb-40">
-      {
-    /* 1. Profile Core Header */
-  }
       <section className="px-6 pt-6">
          <motion.div
     initial={{ opacity: 0, x: -20 }}
@@ -104,7 +106,6 @@ function ProfilePage() {
                    </div>
                 </div>
             </div>
-            
             <div className="flex flex-row items-center gap-3 w-full md:w-auto">
               <Link to="/" className="flex-1 md:flex-none">
                 <Button
@@ -115,7 +116,6 @@ function ProfilePage() {
                   Continue Shopping
                 </Button>
               </Link>
-              
               <Button
     variant="outline"
     className="flex-1 md:flex-none rounded-full h-12 px-6 border-border/10 hover:bg-destructive/5 hover:text-destructive hover:border-destructive/20 text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
@@ -127,10 +127,6 @@ function ProfilePage() {
             </div>
          </motion.div>
       </section>
-
-      {
-    /* 2. Control Architecture (Tabs) */
-  }
       <section className="px-6 flex flex-col md:flex-row gap-8 max-w-7xl mx-auto w-full">
           <Tabs defaultValue="profile" className="w-full">
             <div className="flex flex-col md:flex-row gap-8">
@@ -147,7 +143,6 @@ function ProfilePage() {
                     </TabsTrigger>
                   </TabsList>
                </aside>
-               
                <div className="flex-1 w-full">
                   <AnimatePresence mode="wait">
                     <TabsContent value="profile" className="mt-0 outline-none w-full">
@@ -161,7 +156,6 @@ function ProfilePage() {
                              <h3 className="text-xl font-black font-heading tracking-tight">Personal Profile</h3>
                              <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Manage your account settings and contact info</p>
                           </div>
-
                           <form onSubmit={handleSave} className="space-y-6 max-w-2xl w-full">
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                <div className="space-y-2">
@@ -181,7 +175,6 @@ function ProfilePage() {
   />
                                </div>
                              </div>
-
                              <div className="space-y-2">
                                <Label className="text-[9px] font-black uppercase tracking-widest ml-2 opacity-55">Email Address</Label>
                                <Input
@@ -191,7 +184,6 @@ function ProfilePage() {
     onChange={(e) => setEmail(e.target.value)}
   />
                              </div>
-
                              <div className="pt-4">
                                  <Button
     type="submit"
@@ -205,7 +197,6 @@ function ProfilePage() {
                           </form>
                        </motion.div>
                     </TabsContent>
-
                     <TabsContent value="addresses" className="mt-0 outline-none w-full">
                        {isLoadingAddresses ? (
                          <div className="h-[400px] flex items-center justify-center">
@@ -256,7 +247,6 @@ function ProfilePage() {
                          </motion.div>
                        )}
                     </TabsContent>
-
                     <TabsContent value="payments" className="mt-0 outline-none w-full">
                        <motion.div
     initial={{ opacity: 0, y: 10 }}

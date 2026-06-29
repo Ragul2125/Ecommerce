@@ -19,7 +19,7 @@ function SearchPage() {
         setIsSearching(true);
         try {
           const data = await productService.getProducts({ search: query });
-          setResults(data);
+          setResults(data.products || data || []);
         } catch (error) {
           console.error("Search failed", error);
         } finally {
@@ -32,9 +32,6 @@ function SearchPage() {
     return () => clearTimeout(delayDebounceFn);
   }, [query]);
   return <div className="flex flex-col gap-6 pb-24">
-      {
-    /* Search Header */
-  }
       <section className="px-4 pt-6 space-y-4">
         <div className="flex items-center gap-3">
            <Button
@@ -63,12 +60,8 @@ function SearchPage() {
            </div>
         </div>
       </section>
-
       <section className="px-4 flex-1">
         {!query && <div className="space-y-10">
-            {
-    /* Recent Searches */
-  }
             <div className="space-y-4">
                <div className="flex items-center justify-between">
                   <h2 className="text-xs font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
@@ -88,10 +81,6 @@ function SearchPage() {
                     </Button>)}
                </div>
             </div>
-
-            {
-    /* Trending Now */
-  }
             <div className="space-y-4">
                <h2 className="text-xs font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                   <TrendingUp className="h-3 w-3" /> Trending Now
@@ -108,7 +97,6 @@ function SearchPage() {
                </div>
             </div>
           </div>}
-
         {query && <div className="space-y-6">
               <div className="flex items-center justify-between">
                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
@@ -118,7 +106,6 @@ function SearchPage() {
                     <Filter className="h-3 w-3" /> Filter
                  </Button>
               </div>
-
               {results.length > 0 ? <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4">
                     {results.map((product) => <ProductCard key={product.id} product={product} />)}
                  </div> : !isSearching && <motion.div

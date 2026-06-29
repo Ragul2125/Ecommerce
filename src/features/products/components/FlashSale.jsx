@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Flame } from "lucide-react";
-
 const ALL_FLASH_ITEMS = [
   { id: "f1", name: "Velvet Evening Bag", price: 24070, salePrice: 12035, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&q=80" },
   { id: "f2", name: "Silk Pocket Square", price: 7055, salePrice: 3486, image: "https://images.unsplash.com/photo-1598452963314-b09f397a5c48?w=400&q=80" },
@@ -20,11 +19,8 @@ function FlashSale() {
         return prev;
       });
     }, 1e3);
-    
-    // Shuffle and pick 4 random items for the flash sale
     const shuffled = [...ALL_FLASH_ITEMS].sort(() => 0.5 - Math.random());
     setFlashItems(shuffled.slice(0, 4));
-
     return () => clearInterval(timer);
   }, []);
   const TimeBlock = ({ val }) => {
@@ -36,7 +32,6 @@ function FlashSale() {
   const [flashItems, setFlashItems] = useState([]);
   return <div className="mx-4 overflow-hidden rounded-[2.5rem] bg-primary p-8 text-primary-foreground shadow-premium relative border border-primary/5">
       <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-primary-foreground/5 blur-3xl" />
-      
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 relative z-10">
         <div className="flex items-center gap-4">
           <div className="bg-primary-foreground/10 p-3 rounded-2xl backdrop-blur-md">
@@ -47,7 +42,6 @@ function FlashSale() {
             <p className="text-[10px] uppercase font-black tracking-widest opacity-60">Architectural Reductions</p>
           </div>
         </div>
-        
         <div className="flex items-center gap-3">
           <TimeBlock val={timeLeft.h} />
           <span className="text-xl font-bold text-primary-foreground/60 animate-pulse">:</span>
@@ -57,7 +51,6 @@ function FlashSale() {
           <span className="ml-2 text-[10px] font-black uppercase tracking-widest bg-primary-foreground/15 text-primary-foreground px-4 py-2 rounded-full border border-primary-foreground/5">LEFT</span>
         </div>
       </div>
-      
       <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar relative z-10">
          {flashItems.map((item) => <div
     key={item.id}
@@ -73,7 +66,6 @@ function FlashSale() {
                     -50%
                  </div>
               </div>
-              
               <div className="px-1 space-y-2">
                  <h4 className="text-xs font-black uppercase tracking-wider text-foreground/80 group-hover:text-primary transition-colors line-clamp-1">
                    {item.name}

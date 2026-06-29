@@ -26,14 +26,8 @@ function Navbar() {
   };
   return <header className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-border/30 bg-background/80 backdrop-blur-2xl transition-all duration-500 pt-[env(safe-area-inset-top,0px)]">
       <div className="container mx-auto px-4">
-        {
-    /* Main Header Row */
-  }
         <div className="flex h-16 md:h-20 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            {
-    /* Logo */
-  }
             <Link to="/" className="flex items-center gap-3 active:scale-95 transition-all">
               <div className="flex h-9 w-9 md:h-11 md:w-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-glow">
                 <span className="font-heading text-lg md:text-xl font-black italic">S</span>
@@ -43,10 +37,6 @@ function Navbar() {
               </span>
             </Link>
           </div>
-
-          {
-    /* Search - Desktop Only */
-  }
           <div className="hidden md:block flex-1 max-w-xl mx-12">
             <div className="relative group">
                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
@@ -60,17 +50,11 @@ function Navbar() {
   />
             </div>
           </div>
-
-          {
-    /* Desktop Right Actions */
-  }
           <div className="hidden md:flex items-center gap-4">
             <nav className="flex items-center gap-8 mr-4">
               <Link to="/categories" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-primary transition-colors pointer-events-auto">Logistics</Link>
             </nav>
-
             <div className="h-6 w-px bg-border/30" />
-
             <Button
     variant="ghost"
     size="icon"
@@ -79,7 +63,6 @@ function Navbar() {
   >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full hover:bg-primary/5 transition-all">
@@ -100,7 +83,6 @@ function Navbar() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
             <Link to="/wishlist">
               <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-full bg-muted/20 hover:bg-primary/10 transition-all">
                 <Heart className="h-4 w-4" />
@@ -109,7 +91,6 @@ function Navbar() {
                   </Badge>}
               </Button>
             </Link>
-
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-full bg-muted/20 hover:bg-primary/10 transition-all">
                 <ShoppingCart className="h-4 w-4" />
@@ -119,10 +100,6 @@ function Navbar() {
               </Button>
             </Link>
           </div>
-
-          {
-    /* Mobile Right Actions - Focused & Simple */
-  }
           <div className="flex md:hidden items-center gap-1">
               <Button
     variant="ghost"

@@ -16,15 +16,8 @@ function Footer() {
               Experience the pinnacle of online shopping. We offer premium handcrafted goods with uncompromising quality and attention to detail.
             </p>
             <div className="flex items-center gap-4 text-muted-foreground">
-              {
-    /* <a href="#" className="hover:text-primary transition-colors"><Twitter className="h-5 w-5" /></a>
-    <a href="#" className="hover:text-primary transition-colors"><Instagram className="h-5 w-5" /></a>
-    <a href="#" className="hover:text-primary transition-colors"><Facebook className="h-5 w-5" /></a>
-    <a href="#" className="hover:text-primary transition-colors"><Github className="h-5 w-5" /></a> */
-  }
             </div>
           </div>
-          
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Shop</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
@@ -34,7 +27,6 @@ function Footer() {
               <li><Link to="/categories/sale" className="hover:text-primary transition-colors">On Sale</Link></li>
             </ul>
           </div>
-          
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Support</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
@@ -44,7 +36,6 @@ function Footer() {
               <li><Link to="/shipping" className="hover:text-primary transition-colors">Shipping Information</Link></li>
             </ul>
           </div>
-          
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Legal</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
@@ -54,7 +45,6 @@ function Footer() {
             </ul>
           </div>
         </div>
-        
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row text-sm text-muted-foreground">
           <p>© {(/* @__PURE__ */ new Date()).getFullYear()} Ecommerce. All rights reserved.</p>
           <div className="flex gap-4">

@@ -5,18 +5,15 @@ const mockSuperCategories = [
   { id: "s4", name: "Kids", iconName: "Baby" }
 ];
 const mockCategories = [
-  // Fashion SuperCategory
   { id: "c1", name: "Men's Topwear", slug: "men-top", image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=800&q=80", itemCount: 56, superCategoryId: "s1" },
   { id: "c2", name: "Women's Ethnic", slug: "women-ethnic", image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80", itemCount: 112, superCategoryId: "s1" },
   { id: "c3", name: "Bags & Belts", slug: "accessories", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80", itemCount: 89, superCategoryId: "s1" },
   { id: "c4", name: "Luxury Shoes", slug: "shoes", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80", itemCount: 34, superCategoryId: "s1" },
   { id: "c5", name: "Premium Suits", slug: "suits", image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80", itemCount: 28, superCategoryId: "s1" },
   { id: "c6", name: "Minimalist Silk", slug: "silk", image: "https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=800&q=80", itemCount: 19, superCategoryId: "s1" },
-  // Kids (Placeholders)
   { id: "ck1", name: "Baby Wear", slug: "baby", image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=800&q=80", itemCount: 12, superCategoryId: "s4" }
 ];
 const mockProducts = [
-  // --- WOMEN ---
   {
     id: "w1",
     name: "Silk Minimalist Dress",
@@ -60,7 +57,6 @@ const mockProducts = [
     isNew: true,
     soldCount: 34
   },
-  // --- MEN ---
   {
     id: "m1",
     name: "Slim-Fit Minimalist Suit",
@@ -104,7 +100,6 @@ const mockProducts = [
     isNew: false,
     soldCount: 67
   },
-  // --- ACCESSORIES ---
   {
     id: "a1",
     name: "Italian Leather Watch",
@@ -148,7 +143,6 @@ const mockProducts = [
     isNew: false,
     soldCount: 81
   },
-  // --- NEW ARRIVALS ---
   {
     id: "n1",
     name: "Avant Garde Mesh Top",

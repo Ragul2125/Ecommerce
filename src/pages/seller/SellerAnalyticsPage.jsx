@@ -46,10 +46,6 @@ function SellerAnalyticsPage() {
         <h1 className="text-3xl font-black tracking-tight font-heading">Analytics Reports</h1>
         <p className="text-sm text-muted-foreground">Monitor sales trajectories, revenue trends, and category shares.</p>
       </div>
-
-      {
-    /* Metrics Summaries */
-  }
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="rounded-[2rem] border border-border/40 bg-background/50 shadow-premium">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -63,7 +59,6 @@ function SellerAnalyticsPage() {
             </p>
           </CardContent>
         </Card>
-        
         <Card className="rounded-[2rem] border border-border/40 bg-background/50 shadow-premium">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-xs font-black uppercase tracking-wider text-muted-foreground">Conversion Rate</CardTitle>
@@ -76,7 +71,6 @@ function SellerAnalyticsPage() {
             </p>
           </CardContent>
         </Card>
-
         <Card className="rounded-[2rem] border border-border/40 bg-background/50 shadow-premium">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-xs font-black uppercase tracking-wider text-muted-foreground">Store Page Views</CardTitle>
@@ -90,11 +84,7 @@ function SellerAnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        {
-    /* Revenue Area Chart */
-  }
         <Card className="col-span-4 rounded-[2.5rem] border border-border/40 bg-background/50 shadow-premium">
           <CardHeader>
             <CardTitle className="font-heading font-black">Revenue Timeline</CardTitle>
@@ -134,10 +124,6 @@ function SellerAnalyticsPage() {
             </div>
           </CardContent>
         </Card>
-
-        {
-    /* Category Share Pie Chart */
-  }
         <Card className="col-span-3 rounded-[2.5rem] border border-border/40 bg-background/50 shadow-premium">
           <CardHeader>
             <CardTitle className="font-heading font-black">Category Share</CardTitle>
@@ -166,10 +152,6 @@ function SellerAnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-
-      {
-    /* Top Performing products */
-  }
       <Card className="rounded-[2.5rem] border border-border/40 bg-background/50 shadow-premium">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "@/lib/api";
+import { orderService } from "@/services/orderService";
 function CheckoutPage() {
   const navigate = useNavigate();
   const { items, clearCart } = useCartStore();
@@ -23,7 +24,6 @@ function CheckoutPage() {
     country: "",
     zipCode: ""
   });
-
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
@@ -38,7 +38,6 @@ function CheckoutPage() {
     };
     fetchAddresses();
   }, []);
-
   const handleNextStep1 = async () => {
     let addrToConfirm;
     if (selectedAddressId === "new") {
@@ -69,15 +68,34 @@ function CheckoutPage() {
   if (items.length === 0) {
     return null;
   }
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     setIsProcessing(true);
-    setTimeout(() => {
-      navigate("/order-confirmation", { state: { address: confirmedAddress, total: Math.round(total) } });
+    try {
+      const orderData = {
+        shipping_address_id: confirmedAddress.id,
+        subtotal,
+        tax,
+        shipping_fee: shipping,
+        total_amount: Math.round(total),
+        payment_method: "CREDIT_CARD",
+        items: items.map(item => ({
+          product_id: item.product.id,
+          quantity: item.quantity,
+          product_name: item.product.name,
+          product_image: item.product.images[0] || "",
+          price_at_purchase: item.product.salePrice || item.product.price
+        }))
+      };
+      await orderService.createOrder(orderData);
       clearCart();
       toast.success("Order placed successfully!", {
         description: "Your acquisition is being prepared."
       });
-    }, 2e3);
+      navigate("/order-confirmation", { state: { address: confirmedAddress, total: Math.round(total) } });
+    } catch (error) {
+      toast.error("Failed to place order.");
+      setIsProcessing(false);
+    }
   };
   return <div className="flex flex-col gap-12 pb-40">
        <section className="px-6 pt-10">
@@ -101,7 +119,6 @@ function CheckoutPage() {
              </div>
           </motion.div>
        </section>
-
        <div className="flex flex-col gap-10 px-6 max-w-2xl mx-auto w-full">
           <AnimatePresence mode="wait">
              {step === 1 && <motion.div
@@ -116,7 +133,6 @@ function CheckoutPage() {
                      <div className="grid gap-4">
                         <Input placeholder="Full Name" className="h-16 px-8 rounded-full" />
                         <Input placeholder="Email Address" type="email" className="h-16 px-8 rounded-full" />
-                        
                         {addresses.length > 0 && (
                            <div className="relative w-full">
                               <select 
@@ -136,7 +152,6 @@ function CheckoutPage() {
                               </div>
                            </div>
                         )}
-
                         {selectedAddressId === "new" && (
                           <div className="space-y-4 pt-2">
                             <Input placeholder="Street Address" value={newAddress.street} onChange={e => setNewAddress({...newAddress, street: e.target.value})} className="h-16 px-8 rounded-full" />
@@ -152,14 +167,22 @@ function CheckoutPage() {
                         )}
                      </div>
                   </div>
-                  <Button
-    onClick={handleNextStep1}
-    className="w-full h-18 rounded-full bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl hover:scale-[1.01] active:scale-[0.98] transition-all"
+                  <div className="flex gap-4">
+                     <Button
+    variant="ghost"
+    onClick={() => navigate("/cart")}
+    className="rounded-full h-18 w-18 p-0 border border-border/10 hover:bg-muted shrink-0"
   >
-                     Review Payment
-                  </Button>
+                        <ArrowLeft className="h-6 w-6" />
+                     </Button>
+                     <Button
+    onClick={handleNextStep1}
+    className="flex-1 h-18 rounded-full bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl hover:scale-[1.01] active:scale-[0.98] transition-all"
+  >
+                        Review Payment
+                     </Button>
+                  </div>
                </motion.div>}
-
              {step === 2 && <motion.div
     key="step2"
     initial={{ opacity: 0, scale: 0.98, y: 10 }}
@@ -180,7 +203,6 @@ function CheckoutPage() {
                            <ShieldCheck className="h-6 w-6 opacity-40" />
                         </button>
                      </div>
-
                      <div className="grid gap-4 pt-6">
                         <Input placeholder="Card Architecture Number" className="h-16 px-8 rounded-full" />
                         <div className="grid grid-cols-2 gap-4">
@@ -205,7 +227,6 @@ function CheckoutPage() {
                      </Button>
                   </div>
                </motion.div>}
-
              {step === 3 && <motion.div
     key="step3"
     initial={{ opacity: 0, scale: 0.98, y: 10 }}
@@ -217,7 +238,6 @@ function CheckoutPage() {
                      <h2 className="text-2xl font-black font-heading tracking-tight leading-none">Audit Summary.</h2>
                      <div className="rounded-[3rem] bg-primary text-primary-foreground p-10 space-y-8 shadow-glow relative overflow-hidden">
                          <div className="absolute top-0 right-0 h-40 w-40 bg-white/5 blur-3xl -mr-20 -mt-20" />
-                         
                          <div className="space-y-6 relative z-10">
                             <div className="flex justify-between items-center text-sm">
                                <span className="text-[10px] font-black uppercase tracking-widest opacity-50">Core Value</span>

@@ -22,9 +22,6 @@ function WishlistPage() {
     show: { opacity: 1, scale: 1 }
   };
   return <div className="flex flex-col gap-12 pb-20">
-      {
-    /* Editorial Header */
-  }
       <section className="px-6 pt-10">
          <motion.div
     initial={{ opacity: 0, x: -20 }}
@@ -55,10 +52,6 @@ function WishlistPage() {
                 </Button>}
          </motion.div>
       </section>
-
-      {
-    /* Primary Content Gallery */
-  }
       <section className="px-6 flex-1">
         <AnimatePresence mode="wait">
           {items.length === 0 ? <motion.div
@@ -87,10 +80,6 @@ function WishlistPage() {
             </motion.div>}
         </AnimatePresence>
       </section>
-
-      {
-    /* Premium CTA Area */
-  }
       {items.length > 0 && <motion.section
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
@@ -100,7 +89,6 @@ function WishlistPage() {
             <div className="bg-primary text-primary-foreground rounded-[4rem] p-12 md:p-20 text-center relative overflow-hidden shadow-glow">
                 <div className="absolute top-0 right-0 h-64 w-64 bg-white/5 blur-3xl -mr-32 -mt-32" />
                 <div className="absolute bottom-0 left-0 h-64 w-64 bg-white/5 blur-3xl -ml-32 -mb-32" />
-                
                 <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tighter leading-none mb-6">Want more inspiration?</h2>
                 <p className="text-sm font-medium opacity-50 max-w-[320px] mx-auto mb-10 leading-relaxed">
                    Continue your curation process with our latest seasonal arrivals and limited editorial releases.

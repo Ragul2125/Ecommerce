@@ -31,9 +31,6 @@ const mockNotifications = [
 function NotificationsPage() {
   const navigate = useNavigate();
   return <div className="flex flex-col gap-6 pb-24">
-      {
-    /* Header */
-  }
       <section className="px-4 pt-6 flex items-center justify-between">
          <div className="flex items-center gap-4">
             <Button
@@ -48,10 +45,6 @@ function NotificationsPage() {
          </div>
          <button className="text-[10px] font-black uppercase tracking-widest text-primary">Mark all as read</button>
       </section>
-
-      {
-    /* Categories */
-  }
       <section className="px-4 flex gap-4 overflow-x-auto no-scrollbar">
          {["All", "Orders", "Promotions", "System"].map((cat, i) => <Button
     key={i}
@@ -62,10 +55,6 @@ function NotificationsPage() {
                {cat}
             </Button>)}
       </section>
-
-      {
-    /* List */
-  }
       <section className="px-0 flex-1 space-y-1">
         {mockNotifications.map((n) => <div
     key={n.id}
@@ -84,7 +73,6 @@ function NotificationsPage() {
                 {n.type === "promo" && <Tag className="h-5 w-5" />}
                 {n.type === "system" && <Info className="h-5 w-5" />}
              </div>
-             
              <div className="flex-1 space-y-1">
                 <div className="flex items-center justify-between">
                    <h3 className={cn("text-sm tracking-tight", n.isRead ? "font-bold" : "font-black")}>
@@ -94,14 +82,9 @@ function NotificationsPage() {
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 pr-4">{n.message}</p>
              </div>
-             
              {!n.isRead && <div className="h-2 w-2 rounded-full bg-primary mt-1" />}
           </div>)}
       </section>
-
-      {
-    /* Empty State Suggestion if none */
-  }
       {mockNotifications.length === 0 && <div className="flex flex-col items-center justify-center pt-24 space-y-4 px-10 text-center">
             <div className="h-20 w-20 rounded-full bg-muted flex items-center justify-center">
                <Bell className="h-10 w-10 text-muted-foreground opacity-20" />

@@ -27,15 +27,10 @@ function BottomNav() {
     >
             <div className="relative">
               <item.icon className={cn("h-7 w-7 transition-all", isActive && "stroke-[2.5px]")} />
-              
               {item.count !== void 0 && item.count > 0 && <span className="absolute -top-1.5 -right-1.5 h-4 w-4 flex items-center justify-center rounded-full bg-primary text-primary-foreground border-2 border-background text-[7px] font-black shadow-sm">
                   {item.count}
                 </span>}
             </div>
-            
-            {
-      /* Active Dash Indicator */
-    }
             {isActive && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 w-4 rounded-full bg-primary animate-in fade-in zoom-in duration-300" />}
           </Link>;
   })}

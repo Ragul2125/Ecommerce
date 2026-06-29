@@ -75,7 +75,6 @@ function LoginPage() {
           Enter your email and password to log in
         </p>
       </div>
-      
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -88,13 +87,9 @@ function LoginPage() {
   />
           {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
         </div>
-        
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <Link to="/auth/forgot-password" className="text-xs text-primary hover:underline">
-              Forgot password?
-            </Link>
           </div>
           <Input
     id="password"
@@ -104,13 +99,11 @@ function LoginPage() {
   />
           {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
         </div>
-        
         <Button className="w-full" type="submit" disabled={isLoading}>
           {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Sign In
         </Button>
       </form>
-
       <div className="mt-6">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -129,14 +122,12 @@ function LoginPage() {
           </Button>
         </div>
       </div>
-      
       <div className="mt-6 text-center text-sm">
         Don't have an account?{" "}
         <Link to="/auth/signup" className="text-primary hover:underline">
           Sign up
         </Link>
       </div>
-
       <div className="mt-8 flex justify-center border-t border-border/10 pt-6">
         <Link
     to="/"
